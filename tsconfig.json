@@ -18,7 +18,7 @@
       "@components": ["src/components/index"],
       "@constants": ["src/constants/index"],
       "@screens": ["src/screens/index"],
-      "@assets": ["src/assets/index"],
+      "@assets": ["src/assets"],
       "@utils": ["src/utils/index"],
       "@hooks": ["src/hooks/index"],
       "@themes": ["src/themes/index"],
