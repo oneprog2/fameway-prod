@@ -1,7 +1,6 @@
-import { Button, Text, Title } from "@components";
-import { useRef, useState } from "react";
+import { Button, Text, Title, PaginationDots } from "@components";
+import React, { useRef, useState } from "react";
 import { View, SafeAreaView, FlatList } from "react-native";
-import { FlashList } from "@shopify/flash-list";
 import { useScreenSizes } from "@hooks";
 import { useTheme } from "@styles";
 
@@ -67,6 +66,13 @@ export const PresentationScreen = ({ navigation }) => {
             </View>
           )}
         />
+      </View>
+
+      <View style={{ flex: 1 }}>
+        <PaginationDots
+          currentIndex={listIndex}
+          numberOfPages={DATA.length}
+        ></PaginationDots>
       </View>
 
       <View
