@@ -1,14 +1,17 @@
-import { Button } from '@components';
-import { View, Text } from 'react-native';
+import { Button, CustomInput } from "@components";
+import { useState } from "react";
+import { View, Text } from "react-native";
 
 export const HomeScreen = ({ navigation }) => {
+  const [first, setfirst] = useState("test");
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Home Screen</Text>
+    <View>
       <Button
-      // title="Go to Profile"
-      // onPress={() => navigation.navigate("Profile")}
+        leftIcon={{ name: "home", color: "white" }}
+        // title="Go to Profile"
+        // onPress={() => navigation.navigate("Profile")}
       />
+      {/* <CustomInput value={first} setValue={setfirst}></CustomInput> */}
     </View>
   );
 };

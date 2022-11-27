@@ -1,9 +1,12 @@
 import { FontFamilyTypes, FontSizeTypes, FontsTypes } from './interfaces';
 
 export const fontFamily: FontFamilyTypes = {
-  regular: '',
-  bold: '',
-  light: '',
+  regular: 'Oblivian-Regular',
+  bold: 'Oblivian-Bold',
+  light: 'Oblivian-Light',
+  regularDM: 'DM-Regular',
+  boldDM: 'DM-Bold',
+  lightDM: 'DM-Light',
 };
 
 export const fontSize: FontSizeTypes = {

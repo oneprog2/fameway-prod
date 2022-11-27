@@ -1,7 +1,7 @@
 import { withBackgrounds } from "@storybook/addon-ondevice-backgrounds";
 import { ComponentMeta } from "@storybook/react-native";
 
-import { Button as ButtonComponent } from "@components";
+// import { Input as InputComponent } from "@components";
 
 export const Basic = {
   args: {
@@ -27,7 +27,7 @@ This component contains all buttons types.
 
 export default {
   title: "Fameway/components/buttons/Button",
-  component: ButtonComponent,
+  // component: ButtonComponent,
   argTypes: {
     size: { control: "select", options: ["s", "m", "l"] },
     backgroundColor: {
