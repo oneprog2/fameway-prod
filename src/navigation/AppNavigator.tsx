@@ -11,14 +11,12 @@ import { AuthStackNavigator, CustomerStackNavigator } from "@navigation";
 import { useState } from "react";
 
 const Stack = createNativeStackNavigator();
-const LoginStack = createNativeStackNavigator();
-const MainStack = createNativeStackNavigator();
 
 export const AppNavigator = () => {
   const scheme = useColorScheme();
   const { isFirstLaunch, isLoading: onboardingIsLoading } =
     useGetOnboardingStatus();
-  const [logged, setlogged] = useState(false);
+  const [logged, setlogged] = useState(true);
   return (
     <NavigationContainer theme={scheme === "dark" ? DarkTheme : DefaultTheme}>
       <Stack.Navigator
@@ -51,7 +49,7 @@ export const AppNavigator = () => {
           else
             return (
               <>
-                <MainStack.Screen
+                <Stack.Screen
                   name="CustomerStack"
                   component={CustomerStackNavigator}
                 />

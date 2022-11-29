@@ -10,10 +10,10 @@ const Icon = createIconSetFromIcoMoon(
 
 export type IconProps = TextPropsBase & {
   name: string;
-  size: number;
-  color: string;
+  size?: number;
+  color?: string;
 };
 
-export function CustomIcon(props: IconProps) {
-  return <Icon {...props} />;
+export function CustomIcon({ name, size, color, ...rest }: IconProps) {
+  return <Icon color={color} size={size} name={name} {...rest} />;
 }

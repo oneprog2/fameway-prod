@@ -16,6 +16,7 @@ interface ContextProps {
   size?: keyof ParagraphSizeTypes;
   weight?: "normal" | "bold";
   position?: "left" | "center" | "right";
+  family?: string;
 }
 
 interface StyleTypes {
@@ -27,10 +28,11 @@ export const Text: React.FC<DataProps & ContextProps> = ({
   color,
   size,
   weight,
+  family = "Oblivian-Regular",
   position = "center",
 }) => {
   const theme = useTheme();
-  const styles = useStyles({ theme, color, size, weight, position });
+  const styles = useStyles({ theme, color, size, weight, position, family });
 
   return <TextComponent style={styles.textStyle}>{children}</TextComponent>;
 };
@@ -40,7 +42,7 @@ const getStyles = (context: ContextProps): StyleTypes => ({
     color: context.color || "black",
     fontSize: context.theme?.fonts.fontSize.paragraph[context.size || "t3"],
     fontWeight: context?.weight || "bold",
-    fontFamily: "Oblivian-Regular",
+    fontFamily: context?.family,
     textAlign: context?.position,
   },
 });

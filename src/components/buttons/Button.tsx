@@ -3,10 +3,18 @@ import {
   View,
   StyleProp,
   ViewStyle,
-  TouchableOpacity,
   Text,
   TextStyle,
+  Pressable,
 } from "react-native";
+
+import Animated, {
+  Easing,
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
+} from "react-native-reanimated";
+
 import {
   createUseStyles,
   useTheme,
@@ -15,7 +23,9 @@ import {
   ButtonSizeTypes,
   FontFamilyTypes,
 } from "@styles";
-import Ionicons from "@expo/vector-icons/Ionicons";
+import { CustomIcon } from "@components";
+
+const PRESSED_SCALE = 0.92;
 
 interface iconOptionsType {
   name?: string;
@@ -40,7 +50,7 @@ interface DataProps {
 interface ContextProps {
   theme?: ThemeType;
   disabled?: boolean;
-  size?: "s" | "m" | "l";
+  size?: "s" | "m" | "l" | "none";
   backgroundColor?: string;
   title?: string;
   titleOptions?: titleOptionsType;
@@ -93,43 +103,63 @@ export const Button: React.FC<DataProps & ContextProps> = ({
     elevation,
   });
 
+  const scale = useSharedValue(1);
+
+  const buttonStyle = useAnimatedStyle(() => ({
+    transform: [{ scale: scale.value }],
+  }));
+
+  const timingConfig = {
+    duration: 140,
+    easing: Easing.out(Easing.ease),
+  };
+
   return (
-    <TouchableOpacity
+    <Pressable
       disabled={disabled}
       onPress={onPress}
-      style={styles.containerStyle}
+      onTouchStart={() => {
+        if (!disabled) {
+          scale.value = withTiming(PRESSED_SCALE, timingConfig);
+        }
+      }}
+      onTouchEnd={() => {
+        scale.value = withTiming(1, timingConfig);
+      }}
       {...props}
     >
-      {loading ? (
-        <></>
-      ) : children ? (
-        children
-      ) : (
-        <>
-          {leftIcon?.name ? (
-            <View style={styles.leftIconStyle}>
-              <Ionicons name="md-checkmark-circle" size={32} color="green" />
+      <Animated.View style={[styles.containerStyle, buttonStyle]}>
+        {loading ? (
+          <></>
+        ) : children ? (
+          children
+        ) : (
+          <>
+            {leftIcon?.name ? (
+              <View style={styles.leftIconStyle}>
+                <CustomIcon name="home" size={32} color="green" />
+              </View>
+            ) : rightIcon && !smallWithIcon ? (
+              <View style={styles.leftIconStyle} />
+            ) : null}
+
+            <View style={styles.contentStyle}>
+              <Text style={styles.titleStyle}>{title}</Text>
             </View>
-          ) : rightIcon && !smallWithIcon ? (
-            <View style={styles.leftIconStyle} />
-          ) : null}
 
-          <View style={styles.contentStyle}>
-            <Text style={styles.titleStyle}>{title}</Text>
-          </View>
-
-          {rightIcon?.name ? (
-            <View style={styles.rightIconStyle}></View>
-          ) : leftIcon && !smallWithIcon ? (
-            <View style={styles.rightIconStyle} />
-          ) : null}
-        </>
-      )}
-    </TouchableOpacity>
+            {rightIcon?.name ? (
+              <View style={styles.rightIconStyle}></View>
+            ) : leftIcon && !smallWithIcon ? (
+              <View style={styles.rightIconStyle} />
+            ) : null}
+          </>
+        )}
+      </Animated.View>
+    </Pressable>
   );
 };
 
-const getHeight = (size: "s" | "m" | "l" | undefined) => {
+const getHeight = (size: "s" | "m" | "l" | "none" | undefined) => {
   switch (size) {
     case "s":
       return 20;
@@ -137,6 +167,8 @@ const getHeight = (size: "s" | "m" | "l" | undefined) => {
       return 40;
     case "l":
       return 50;
+    case "none":
+      return 0;
     default:
       return 50;
   }
@@ -148,7 +180,8 @@ const getStyles = (context: ContextProps): StyleTypes => ({
     backgroundColor:
       context.backgroundColor ||
       (context.outlined ? "transparent" : context.theme?.colors.basics.black),
-    minHeight: getHeight(context.size),
+    height: context?.size === "none" ? "100%" : getHeight(context.size),
+    width: "100%",
     flexDirection: "row",
     borderRadius: context.theme?.metrics.borderRadius[context.rounded || "s"],
     padding: context.size === "s" ? 5 : 10,

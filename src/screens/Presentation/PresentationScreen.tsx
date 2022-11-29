@@ -84,6 +84,9 @@ export const PresentationScreen = ({ navigation }) => {
       >
         <View style={{ width: windowWidth / 3, marginHorizontal: 34 }}>
           <Button
+            onPress={() => {
+              navigation.navigate("AuthStack");
+            }}
             rounded={"m"}
             outlined
             title="Passer"
