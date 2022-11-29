@@ -1,18 +1,18 @@
-import { Button, CustomInput } from "@components";
+import { Button, HorizontalNavbar } from "@components";
 import { useState } from "react";
-import { View, Text, SafeAreaView } from "react-native";
+import { SafeAreaView, View } from "react-native";
+import { FamewayIcon } from "@components";
 
 export const HomeScreen = ({ navigation }) => {
   const [first, setfirst] = useState("test");
   return (
     <SafeAreaView>
-      <Button
-        onPress={() => navigation.navigate("firstSheet")}
-        leftIcon={{ name: "home", color: "white" }}
-        // title="Go to Profile"
-        // onPress={() => navigation.navigate("Profile")}
-      />
-      {/* <CustomInput value={first} setValue={setfirst}></CustomInput> */}
+      {/* <View style={{ width: 50, height: 50 }}>
+        <FamewayIcon />
+      </View> */}
+      <View style={{ height: 200 }}>
+        <HorizontalNavbar />
+      </View>
     </SafeAreaView>
   );
 };

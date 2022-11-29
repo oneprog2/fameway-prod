@@ -1,3 +1,3 @@
 // export * from "./components";
-export * from './screens';
-export * from './styles';
+export * from "./screens";
+export * from "./styles";
