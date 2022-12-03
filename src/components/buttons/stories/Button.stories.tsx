@@ -1,11 +1,11 @@
-import { withBackgrounds } from '@storybook/addon-ondevice-backgrounds';
-import {  ComponentMeta } from '@storybook/react-native';
+import { withBackgrounds } from "@storybook/addon-ondevice-backgrounds";
+import { ComponentMeta } from "@storybook/react-native";
 
-import { Button as ButtonComponent,  } from '@components';
+import { Button as ButtonComponent } from "@components";
 
 export const Basic = {
   args: {
-    title: 'Hello World!!',
+    title: "Hello World!!",
   },
 };
 
@@ -26,38 +26,38 @@ This component contains all buttons types.
 `;
 
 export default {
-  title: 'Strivee/components/buttons/Button',
+  title: "Fameway/components/buttons/Button",
   component: ButtonComponent,
   argTypes: {
-    size: { control: 'select', options: ['s', 'm', 'l'] },
+    size: { control: "select", options: ["s", "m", "l"] },
     backgroundColor: {
       control: {
-        type: 'color',
+        type: "color",
       },
     },
   },
   args: {
-    propertyA: 'Item One',
-    title: 'title',
+    propertyA: "Item One",
+    title: "title",
     titleOptions: {
-      size: 't1',
-      position: 'center',
-      weight: 'bold',
+      size: "t1",
+      position: "center",
+      weight: "bold",
     },
     smallWithIcon: false,
     disabled: false,
-    size: 'm',
+    size: "m",
     backgroundColor: undefined,
     outlined: false,
-    rounded: 's',
+    rounded: "s",
     leftIcon: {
-      name: 'SvgIcon',
-      color: 'red',
+      name: "SvgIcon",
+      color: "red",
       size: 20,
     },
     rightIcon: {
-      name: 'SvgIcon',
-      color: 'red',
+      name: "SvgIcon",
+      color: "red",
       size: 20,
     },
     loading: false,

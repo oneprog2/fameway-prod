@@ -1,14 +1,15 @@
-import { Button } from '@components';
-import { View, Text } from 'react-native';
+import { Button, HorizontalNavbar } from "@components";
+import { useState } from "react";
+import { SafeAreaView, View } from "react-native";
+import { FamewayIcon } from "@components";
 
 export const HomeScreen = ({ navigation }) => {
+  const [first, setfirst] = useState("test");
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Home Screen</Text>
-      <Button
-      // title="Go to Profile"
-      // onPress={() => navigation.navigate("Profile")}
-      />
-    </View>
+    <SafeAreaView>
+      <View style={{ height: 200 }}>
+        <HorizontalNavbar />
+      </View>
+    </SafeAreaView>
   );
 };

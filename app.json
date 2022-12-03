@@ -1,7 +1,9 @@
 {
   "expo": {
     "splash": {
-      "image": "./assets/splash.png"
+      "image": "./src/assets/images/splash.png",
+      "backgroundColor": "#222222",
+      "resizeMode": "contain"
     }
   }
 }

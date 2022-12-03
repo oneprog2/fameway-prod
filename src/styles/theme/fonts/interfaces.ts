@@ -2,6 +2,9 @@ export interface FontFamilyTypes {
   regular: string
   bold: string
   light: string
+  regularDM: string
+  boldDM: string
+  lightDM: string
 }
 
 export interface FontSizeTypes {

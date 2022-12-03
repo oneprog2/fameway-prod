@@ -3,6 +3,7 @@ import * as React from "react";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 import { View } from "react-native";
+import { StatusBar } from "expo-status-bar";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -14,6 +15,7 @@ function App() {
     "DM-Bold": require("@assets/fonts/DM/DM-Bold.ttf"),
     "DM-Regular": require("@assets/fonts/DM/DM-Regular.ttf"),
     "DM-Medium": require("@assets/fonts/DM/DM-Medium.ttf"),
+    IcoMoon: require("@assets/fonts/icomoon.ttf"),
   });
 
   const onLayoutRootView = React.useCallback(async () => {
@@ -22,8 +24,13 @@ function App() {
     }
   }, [fontsLoaded]);
 
+  if (!fontsLoaded) {
+    return null;
+  }
+
   return (
     <View style={{ flex: 1 }} onLayout={onLayoutRootView}>
+      <StatusBar style="dark" />
       <AppNavigator />
     </View>
   );

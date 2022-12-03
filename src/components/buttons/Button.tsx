@@ -1,19 +1,31 @@
-import React from 'react';
+import React from "react";
 import {
   View,
   StyleProp,
   ViewStyle,
-  TouchableOpacity,
   Text,
   TextStyle,
-} from 'react-native';
+  Pressable,
+} from "react-native";
+
+import Animated, {
+  Easing,
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
+} from "react-native-reanimated";
+
 import {
   createUseStyles,
   useTheme,
   ThemeType,
   BorderRadiusTypes,
   ButtonSizeTypes,
-} from '@styles';
+  FontFamilyTypes,
+} from "@styles";
+import { CustomIcon } from "@components";
+
+const PRESSED_SCALE = 0.92;
 
 interface iconOptionsType {
   name?: string;
@@ -23,10 +35,10 @@ interface iconOptionsType {
 
 interface titleOptionsType {
   size?: keyof ButtonSizeTypes;
-  position?: 'center' | 'left' | 'right';
+  position?: "center" | "left" | "right";
   color?: string;
-  weight?: 'normal' | 'bold';
-  flex?: number,
+  weight?: keyof FontFamilyTypes;
+  flex?: number;
 }
 
 interface DataProps {
@@ -38,7 +50,7 @@ interface DataProps {
 interface ContextProps {
   theme?: ThemeType;
   disabled?: boolean;
-  size?: 's' | 'm' | 'l';
+  size?: "s" | "m" | "l" | "none";
   backgroundColor?: string;
   title?: string;
   titleOptions?: titleOptionsType;
@@ -58,12 +70,12 @@ interface StyleTypes {
   titleStyle: StyleProp<TextStyle>;
 }
 
-export const Button: React.FC< DataProps & ContextProps> = ({
+export const Button: React.FC<DataProps & ContextProps> = ({
   onPress,
   children,
   disabled = false,
   size,
-  title = 'Button',
+  title = "Button",
   titleOptions,
   backgroundColor,
   rounded,
@@ -91,86 +103,117 @@ export const Button: React.FC< DataProps & ContextProps> = ({
     elevation,
   });
 
+  const scale = useSharedValue(1);
+
+  const buttonStyle = useAnimatedStyle(() => ({
+    transform: [{ scale: scale.value }],
+  }));
+
+  const timingConfig = {
+    duration: 140,
+    easing: Easing.out(Easing.ease),
+  };
+
   return (
-    <TouchableOpacity
+    <Pressable
       disabled={disabled}
       onPress={onPress}
-      style={styles.containerStyle}
-      {...props}>
-      {loading ? (
-        <></>
-      ) : children ? (
-        children
-      ) : (
-        <>
-          {leftIcon?.name ? (
-            <View style={styles.leftIconStyle}>
-            </View>
-          ) : rightIcon && !smallWithIcon ? (
-            <View style={styles.leftIconStyle} />
-          ) : null}
+      onTouchStart={() => {
+        if (!disabled) {
+          scale.value = withTiming(PRESSED_SCALE, timingConfig);
+        }
+      }}
+      onTouchEnd={() => {
+        scale.value = withTiming(1, timingConfig);
+      }}
+      {...props}
+    >
+      <Animated.View style={[styles.containerStyle, buttonStyle]}>
+        {loading ? (
+          <></>
+        ) : children ? (
+          children
+        ) : (
+          <>
+            {leftIcon?.name ? (
+              <View style={styles.leftIconStyle}>
+                <CustomIcon name="home" size={32} color="green" />
+              </View>
+            ) : rightIcon && !smallWithIcon ? (
+              <View style={styles.leftIconStyle} />
+            ) : null}
 
-          <View style={styles.contentStyle}>
-            <Text style={styles.titleStyle}>{title}</Text>
-          </View>
-
-          {rightIcon?.name ? (
-            <View style={styles.rightIconStyle}>
+            <View style={styles.contentStyle}>
+              <Text style={styles.titleStyle}>{title}</Text>
             </View>
-          ) : leftIcon && !smallWithIcon ? (
-            <View style={styles.rightIconStyle} />
-          ) : null}
-        </>
-      )}
-    </TouchableOpacity>
+
+            {rightIcon?.name ? (
+              <View style={styles.rightIconStyle}></View>
+            ) : leftIcon && !smallWithIcon ? (
+              <View style={styles.rightIconStyle} />
+            ) : null}
+          </>
+        )}
+      </Animated.View>
+    </Pressable>
   );
 };
 
-const getHeight = (size: 's' | 'm' | 'l' | undefined) => {
+const getHeight = (size: "s" | "m" | "l" | "none" | undefined) => {
   switch (size) {
-  case 's':
-    return 20;
-  case 'm':
-    return 40;
-  case 'l':
-    return 50;
-  default:
-    return 50;
+    case "s":
+      return 20;
+    case "m":
+      return 40;
+    case "l":
+      return 50;
+    case "none":
+      return 0;
+    default:
+      return 50;
   }
 };
 
 const getStyles = (context: ContextProps): StyleTypes => ({
   containerStyle: {
-    opacity: context.disabled ?  0.6 : 1,
+    opacity: context.disabled ? 0.6 : 1,
     backgroundColor:
-    context.backgroundColor || (context.outlined ? 'transparent' :
-      context.theme?.colors.basics.black),
-    minHeight: getHeight(context.size),
-    flexDirection: 'row',
-    borderRadius: context.theme?.metrics.borderRadius[context.rounded || 's'],
-    padding: context.size === 's' ? 5 : 10,
-    shadowColor: '#000',
+      context.backgroundColor ||
+      (context.outlined ? "transparent" : context.theme?.colors.basics.black),
+    height: context?.size === "none" ? "100%" : getHeight(context.size),
+    width: "100%",
+    flexDirection: "row",
+    borderRadius: context.theme?.metrics.borderRadius[context.rounded || "s"],
+    padding: context.size === "s" ? 5 : 10,
+    shadowColor: "#000",
     shadowOffset: { width: 0, height: context.elevation || 0 },
     shadowOpacity: context.elevation ? 0.5 : 0,
     shadowRadius: 2,
     elevation: context.elevation || 0,
-    alignContent: 'center',
-    justifyContent: 'center',
+    alignContent: "center",
+    justifyContent: "center",
   },
   leftIconStyle: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
-  contentStyle: { flex: context.titleOptions?.flex || 3, justifyContent: 'center' },
-  rightIconStyle: { flex: 1, justifyContent: 'center', alignItems: 'center' },
+  contentStyle: {
+    flex: context.titleOptions?.flex || 3,
+    justifyContent: "center",
+  },
+  rightIconStyle: { flex: 1, justifyContent: "center", alignItems: "center" },
   titleStyle: {
-    color: context.titleOptions?.color || (context.outlined ?  context.theme?.colors.basics.black :
-      context.theme?.colors.basics.white),
+    color:
+      context.titleOptions?.color ||
+      (context.outlined
+        ? context.theme?.colors.basics.black
+        : context.theme?.colors.basics.white),
     fontSize:
-      context.theme?.fonts.fontSize.button[context.titleOptions?.size || 't1'],
-    textAlign: context.titleOptions?.position || 'center',
-    fontWeight: context.titleOptions?.weight || 'bold',
+      context.theme?.fonts.fontSize.button[context.titleOptions?.size || "t1"],
+    textAlign: context.titleOptions?.position || "center",
+    fontFamily:
+      context.theme?.fonts.fontFamily[context.titleOptions?.weight || "bold"],
   },
 });
 
