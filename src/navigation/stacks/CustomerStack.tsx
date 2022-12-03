@@ -9,7 +9,7 @@ import {
 import { createBottomSheetNavigator } from "@th3rdwave/react-navigation-bottom-sheet";
 import { CartTabButton, CustomIcon, TabBarIcon } from "@components";
 import { BlurView } from "expo-blur";
-import { StyleSheet } from "react-native";
+import { StyleSheet, View } from "react-native";
 
 const CustomerStack = createBottomTabNavigator();
 const BottomSheet = createBottomSheetNavigator();
@@ -41,11 +41,7 @@ export const CustomerStackTabs = () => {
       <CustomerStack.Screen
         options={{
           tabBarIcon: ({ focused }) => (
-            <TabBarIcon
-              screenName="Home"
-              focused={focused}
-              iconName={focused ? "home-2-fill" : "home-2-line"}
-            />
+            <TabBarIcon screenName="Home" focused={focused} iconName={"icon"} />
           ),
         }}
         name="Home"
@@ -74,7 +70,11 @@ export const CustomerStackTabs = () => {
         }}
         options={{
           tabBarIcon: ({ focused }) => (
-            <CustomIcon name="shopping-bag-3-line" color="#4f4f4f" size="30" />
+            <CustomIcon
+              name="shopping-bag-converted"
+              color="#4f4f4f"
+              size="30"
+            />
           ),
           tabBarButton: (props) => <CartTabButton {...props} />,
         }}

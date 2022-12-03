@@ -7,9 +7,9 @@ export const HomeScreen = ({ navigation }) => {
   const [first, setfirst] = useState("test");
   return (
     <SafeAreaView>
-      {/* <View style={{ width: 50, height: 50 }}>
+      <View style={{ width: 50, height: 50 }}>
         <FamewayIcon />
-      </View> */}
+      </View>
       <View style={{ height: 200 }}>
         <HorizontalNavbar />
       </View>

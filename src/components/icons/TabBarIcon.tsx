@@ -1,5 +1,5 @@
-import { CustomIcon, Text } from "@components";
-import { View } from "react-native";
+import { CustomIcon, Text, FamewayIcon } from "@components";
+import { Image, View } from "react-native";
 
 type PlayTabIconProps = {
   screenName: string;
@@ -19,11 +19,25 @@ export const TabBarIcon = ({
       justifyContent: "center",
     }}
   >
-    <CustomIcon
-      color={focused ? "#1f1f1f" : "#717171"}
-      name={iconName}
-      size={25}
-    />
+    {iconName === "icon" ? (
+      <View
+        className={`h-[25px] w-[25px] border-2 ${
+          focused ? "border-neutral-8" : "border-neutral-10"
+        } rounded-full`}
+      >
+        {focused ? (
+          <FamewayIcon color="#FFCF26" />
+        ) : (
+          <FamewayIcon color="#717171" />
+        )}
+      </View>
+    ) : (
+      <CustomIcon
+        color={focused ? "#1f1f1f" : "#717171"}
+        name={iconName}
+        size={25}
+      />
+    )}
     <View style={{ marginTop: 3 }}>
       <Text
         family="DM-Bold"
