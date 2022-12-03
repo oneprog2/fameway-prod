@@ -22,7 +22,7 @@ export const TabBarIcon = ({
     {iconName === "icon" ? (
       <View
         className={`h-[25px] w-[25px] border-2 ${
-          focused ? "border-neutral-8" : "border-neutral-10"
+          focused ? "border-neutral-8 bg-neutral-2" : "border-neutral-10"
         } rounded-full`}
       >
         {focused ? (
