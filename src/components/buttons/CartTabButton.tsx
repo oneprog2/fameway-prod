@@ -1,8 +1,6 @@
 import { createUseStyles, useTheme, ThemeType } from "@styles";
 import { View, StyleProp, ViewStyle, PressableProps } from "react-native";
 import { Button } from "@components";
-import { useNavigation } from "@react-navigation/native";
-import { useRoute } from "@react-navigation/native";
 
 interface DataProps {
   children: React.ReactNode;
@@ -41,7 +39,7 @@ export const CartTabButton: React.FC<DataProps & ContextProps> = ({
     >
       <Button
         size={"none"}
-        backgroundColor="#FFCE00"
+        backgroundColor="#ffce00"
         rounded="full"
         onPress={onPress}
       >
