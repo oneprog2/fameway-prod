@@ -1,4 +1,11 @@
-import { Button, HorizontalNavbar, NoveltyCard, Text } from "@components";
+import {
+  ArticleCard,
+  Button,
+  HorizontalNavbar,
+  NoveltyCard,
+  PageContainer,
+  Text,
+} from "@components";
 import { useState } from "react";
 import { Image, SafeAreaView, View } from "react-native";
 import { CardContainer, InfluencersCard } from "@components";
@@ -38,10 +45,31 @@ const DATA = {
   ],
 };
 
+const SectionName = ({ name }: { name: string }) => {
+  return (
+    <View className="flex-1 my-6 flex-row items-center justify-center">
+      <View className="justify-center  items-start h-full">
+        <Text size="xxl" weight="bold">
+          {name}
+        </Text>
+      </View>
+      <View className="flex-1 items-end">
+        <Button
+          iconOnly
+          role="empty"
+          size="full"
+          icon={<Text size="sm">Show all</Text>}
+          backgroundColor="transparent"
+        ></Button>
+      </View>
+    </View>
+  );
+};
+
 export const HomeScreen = ({ navigation }) => {
   const [first, setfirst] = useState("test");
   return (
-    <SafeAreaView className="flex-1 bg-light">
+    <PageContainer pageName="Home">
       <View className="sticky h-14">
         <HorizontalNavbar />
       </View>
@@ -53,22 +81,7 @@ export const HomeScreen = ({ navigation }) => {
           onPress={() => navigation.navigate("Profil")}
         />
 
-        <View className="flex-1 my-4 flex-row items-center justify-center">
-          <View className="justify-center  items-start h-full">
-            <Text size="xxl" weight="bold">
-              New creators
-            </Text>
-          </View>
-          <View className="flex-1 items-end">
-            <Button
-              iconOnly
-              role="empty"
-              size="full"
-              icon={<Text>Show all</Text>}
-              backgroundColor="transparent"
-            ></Button>
-          </View>
-        </View>
+        <SectionName name="New creators" />
 
         <FlashList
           horizontal
@@ -76,7 +89,7 @@ export const HomeScreen = ({ navigation }) => {
           showsVerticalScrollIndicator={false}
           data={DATA.influencers}
           renderItem={({ item }) => (
-            <View className="h-40 w-40 pr-4">
+            <View className="pr-4">
               <InfluencersCard
                 backgroundColor="#f4f4f4"
                 key={item.id}
@@ -86,7 +99,25 @@ export const HomeScreen = ({ navigation }) => {
             </View>
           )}
         />
+        <SectionName name="New items" />
+
+        <FlashList
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          showsVerticalScrollIndicator={false}
+          data={DATA.influencers}
+          renderItem={({ item }) => (
+            <View className="h-40 w-40 pr-4">
+              <ArticleCard
+                backgroundColor="#f4f4f4"
+                key={item.id}
+                name={item.name}
+                image={item.image}
+              />
+            </View>
+          )}
+        />
       </ScrollView>
-    </SafeAreaView>
+    </PageContainer>
   );
 };

@@ -22,7 +22,7 @@ export const NoveltyCard = ({
       padding="normal"
       role="primary"
       roundness="xl"
-      position="left"
+      light="left"
     >
       <View className="p-4 pt-6">
         <Text

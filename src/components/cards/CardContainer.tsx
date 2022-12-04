@@ -36,7 +36,7 @@ export function CardContainer(props: CardContainerProps) {
     padding = "normal",
     roundness = "normal",
     backgroundColor = "#ffce00",
-    position = "center",
+    light = "center",
   } = props;
 
   return (
@@ -47,9 +47,11 @@ export function CardContainer(props: CardContainerProps) {
         padding,
       })}
     >
-      <View className="absolute h-full w-full">
-        <Light position={position} color="#FFFFFF" />
-      </View>
+      {light === "off" ? null : (
+        <View className="absolute h-full w-full">
+          <Light position={light} color="#FFFFFF" />
+        </View>
+      )}
       {children}
     </View>
   );

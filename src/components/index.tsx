@@ -5,3 +5,4 @@ export * from "./texts";
 export * from "./layouts";
 export * from "./navbar";
 export * from "./cards";
+export * from "./containers";
