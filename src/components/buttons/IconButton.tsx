@@ -33,7 +33,7 @@ export const IconButton: React.FC<DataProps & ContextProps> = ({
     <TouchableOpacity style={styles.containerStyle}>
       <CustomIcon name={icon.name} color={icon.color} size={icon.size} />
       <View>
-        <Text family="DM-Regular" color="#717171">
+        <Text family="DM" weight="regular" color="neutral-disabled">
           {label}
         </Text>
       </View>

@@ -25,7 +25,7 @@ import {
 } from "@styles";
 import { CustomIcon } from "@components";
 
-const PRESSED_SCALE = 0.92;
+const PRESSED_SCALE = 0.95;
 
 interface iconOptionsType {
   name?: string;

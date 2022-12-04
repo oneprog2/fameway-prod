@@ -29,6 +29,19 @@ export const HomeScreen = ({ navigation }) => {
           images={DATA.images}
           onPress={() => navigation.navigate("Profil")}
         />
+
+        <View className="flex-1 mt-6 flex-row items-center justify-center">
+          <View className="justify-center  items-start h-full ">
+            <Text size="xxl" weight="bold">
+              New creators
+            </Text>
+          </View>
+          <View className="flex-1 items-end">
+            <Button backgroundColor="transparent">
+              <Text>Show all</Text>
+            </Button>
+          </View>
+        </View>
       </ScrollView>
     </SafeAreaView>
   );

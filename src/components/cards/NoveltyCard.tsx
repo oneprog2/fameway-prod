@@ -6,6 +6,7 @@ export type NoveltyCardProps = {
   buttonLabel?: string;
   images?: any;
   onPress?: () => void;
+  backgroundColor?: string;
 };
 
 export const NoveltyCard = ({
@@ -13,9 +14,15 @@ export const NoveltyCard = ({
   buttonLabel,
   images,
   onPress,
+  backgroundColor,
 }: NoveltyProps) => {
   return (
-    <CardContainer padding="normal" role="primary" roundness="xl">
+    <CardContainer
+      backgroundColor={backgroundColor}
+      padding="normal"
+      role="primary"
+      roundness="xl"
+    >
       <View className="p-4 pt-6">
         <Text
           position="left"
