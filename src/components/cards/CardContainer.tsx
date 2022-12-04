@@ -5,12 +5,6 @@ import { Light } from "@components";
 
 const CardContainerClassName = variants("flex-1 overflow-hidden", {
   variants: {
-    // role: {
-    //   normal: "bg-neutral-a-3 border border-neutral-a-3",
-    //   primary: "bg-fameway",
-    //   critical: "bg-critical-9",
-    //   empty: "bg-transparent border border-neutral-a-3",
-    // },
     padding: {
       none: "",
       normal: "p-2",
@@ -30,7 +24,9 @@ const CardContainerClassName = variants("flex-1 overflow-hidden", {
   },
 });
 
-export type CardContainerProps = VariantProps<typeof CardContainerClassName> & {
+export type CardContainerProps = VariantsProps<
+  typeof CardContainerClassName
+> & {
   children: React.ReactNode;
 };
 
@@ -40,6 +36,7 @@ export function CardContainer(props: CardContainerProps) {
     padding = "normal",
     roundness = "normal",
     backgroundColor = "#ffce00",
+    position = "center",
   } = props;
 
   return (
@@ -50,8 +47,8 @@ export function CardContainer(props: CardContainerProps) {
         padding,
       })}
     >
-      <View className="absolute">
-        <Light color="#FFFFFF" />
+      <View className="absolute h-full w-full">
+        <Light position={position} color="#FFFFFF" />
       </View>
       {children}
     </View>

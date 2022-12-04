@@ -15,13 +15,14 @@ export const NoveltyCard = ({
   images,
   onPress,
   backgroundColor,
-}: NoveltyProps) => {
+}: NoveltyCardProps) => {
   return (
     <CardContainer
       backgroundColor={backgroundColor}
       padding="normal"
       role="primary"
       roundness="xl"
+      position="left"
     >
       <View className="p-4 pt-6">
         <Text
@@ -33,7 +34,7 @@ export const NoveltyCard = ({
           {title}
         </Text>
         <View className="pr-40 pt-6 pb-4">
-          <Button onPress={onPress} title={buttonLabel} rounded="full" />
+          <Button onPress={onPress} label={buttonLabel} roundness="full" />
         </View>
       </View>
 

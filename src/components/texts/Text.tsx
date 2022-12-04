@@ -4,7 +4,7 @@ import { Text as TextBase, TextProps as TextPropsBase } from "react-native";
 const textClassName = variants("", {
   variants: {
     color: {
-      white: "white",
+      white: "text-white",
       neutral: "text-neutral-12",
       "neutral-faded": "text-neutral-11",
       "neutral-muted": "text-neutral-9",
@@ -69,7 +69,6 @@ export function Text(props: TextProps) {
     position = "center",
     weight = "medium",
     family = "Oblivian",
-    className,
   } = props;
   return (
     <TextBase

@@ -38,24 +38,25 @@ export const CartTabButton: React.FC<DataProps & ContextProps> = ({
       ]}
     >
       <Button
+        role="fameway"
         size={"none"}
-        backgroundColor="#ffce00"
-        rounded="full"
+        roundness="full"
         onPress={onPress}
-      >
-        <View
-          style={[
-            styles.containerStyle,
-            {
-              justifyContent: "center",
-              alignItems: "center",
-              bottom: 10,
-            },
-          ]}
-        >
-          {children}
-        </View>
-      </Button>
+        iconOnly
+        icon={
+          <View
+            style={[
+              styles.containerStyle,
+              {
+                justifyContent: "center",
+                alignItems: "center",
+              },
+            ]}
+          >
+            {children}
+          </View>
+        }
+      ></Button>
     </View>
   );
 };

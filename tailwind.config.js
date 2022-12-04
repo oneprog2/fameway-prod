@@ -76,8 +76,8 @@ const theme = {
   },
   extend: {
     colors: {
-      white: "#FFFFFF",
-      black: "#000000",
+      light: "#FFFFFF",
+      dark: "#000000",
       fameway: "#ffce00",
       ...variablesToTheme(darkThemeVariables),
     },
