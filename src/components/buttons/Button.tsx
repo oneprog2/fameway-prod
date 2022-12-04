@@ -206,14 +206,12 @@ const getStyles = (context: ContextProps): StyleTypes => ({
   titleStyle: {
     color:
       context.titleOptions?.color ||
-      (context.outlined
-        ? context.theme?.colors.basics.black
-        : context.theme?.colors.basics.white),
+      (context.outlined ? "#222222" : context.theme?.colors.basics.white),
     fontSize:
       context.theme?.fonts.fontSize.button[context.titleOptions?.size || "t1"],
     textAlign: context.titleOptions?.position || "center",
     fontFamily:
-      context.theme?.fonts.fontFamily[context.titleOptions?.weight || "bold"],
+      context.theme?.fonts.fontFamily[context.titleOptions?.weight || "boldDM"],
   },
 });
 
