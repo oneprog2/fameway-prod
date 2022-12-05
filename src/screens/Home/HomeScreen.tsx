@@ -7,6 +7,7 @@ import {
   NoveltyCard,
   PageContainer,
   Text,
+  CreateAccountCard,
 } from "@components";
 import { useState } from "react";
 import { Image, SafeAreaView, View } from "react-native";
@@ -91,6 +92,37 @@ const DATA = {
         name: "Tee shirt - Lacoste",
         price: "40",
         image: require("@assets/images/article.png"),
+      },
+      {
+        id: "2",
+        name: "Album - Oreilles sales",
+        price: "40.40",
+        image: require("@assets/images/article1.png"),
+      },
+      {
+        id: "3",
+        name: "Visio 10 minutes",
+        price: "25",
+        image: require("@assets/images/article2.png"),
+      },
+    ],
+  },
+  collection2: {
+    id: "1",
+    name: "Elsa bitch",
+    description:
+      "This incredible collection is made by one of the most popular girl in the world",
+    influencer: {
+      id: "1",
+      name: "Elsa Bitch",
+      image: require("@assets/images/influencer2.png"),
+    },
+    articles: [
+      {
+        id: "1",
+        name: "Tee shirt - Lacoste",
+        price: "40",
+        image: require("@assets/images/article2.png"),
       },
       {
         id: "2",
@@ -192,13 +224,58 @@ export const HomeScreen = ({ navigation }) => {
             </View>
           )}
         />
-        <View className={"flex-1 p-4 py-10"}>
+
+        <View className={"flex-1 p-4 pt-10"}>
           <CollectionCard
             backgroundColor="#fb4e7c"
             name={DATA.collection?.name}
             description={DATA.collection?.description}
             articles={DATA.collection?.articles}
             influencer={DATA.collection?.influencer}
+          />
+        </View>
+
+        <View className={"px-3 flex-1"}>
+          <SectionName name="Trendy items" />
+        </View>
+
+        <FlashList
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          showsVerticalScrollIndicator={false}
+          data={DATA.articles}
+          ListFooterComponent={() => <View className="pl-4" />}
+          renderItem={({ item }) => (
+            <View className="pl-4 flex-1">
+              <ArticleCard
+                backgroundColor="#f4f4f4"
+                key={item.id}
+                name={item.name}
+                description={item.description}
+                price={item.price + "€"}
+                image={item.image}
+              />
+            </View>
+          )}
+        />
+
+        <View className={"flex-1 p-4 pt-10"}>
+          <CollectionCard
+            startingDate="2021-01-01"
+            backgroundColor="#b655f0"
+            name={DATA.collection2?.name}
+            description={DATA.collection2?.description}
+            articles={DATA.collection2?.articles}
+            influencer={DATA.collection2?.influencer}
+          />
+          <Text></Text>
+        </View>
+
+        <View className="p-3 flex-1 pb-10">
+          <CreateAccountCard
+            title="Create your account today"
+            subtitle="Never miss exclusive drops again"
+            backgroundColor="#f5f5f5"
           />
         </View>
       </ScrollView>
