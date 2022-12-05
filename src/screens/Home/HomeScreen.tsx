@@ -108,23 +108,25 @@ export const HomeScreen = ({ navigation }) => {
       <View className="fixed h-14">
         <HorizontalNavbar />
       </View>
-      <ScrollView className={"flex-1 p-3"}>
-        <NoveltyCard
-          title={DATA.title}
-          buttonLabel={DATA.buttonLabel}
-          images={DATA.images}
-          onPress={() => navigation.navigate("Profil")}
-        />
-
-        <SectionName name="New creators" />
+      <ScrollView className={"flex-1"}>
+        <View className={"p-3"}>
+          <NoveltyCard
+            title={DATA.title}
+            buttonLabel={DATA.buttonLabel}
+            images={DATA.images}
+            onPress={() => navigation.navigate("Profil")}
+          />
+          <SectionName name="New creators" />
+        </View>
 
         <FlashList
           horizontal
           showsHorizontalScrollIndicator={false}
           showsVerticalScrollIndicator={false}
+          ListFooterComponent={() => <View className="pl-4" />}
           data={DATA.influencers}
           renderItem={({ item }) => (
-            <View className="pr-4">
+            <View className="pl-4">
               <InfluencersCard
                 backgroundColor="#f4f4f4"
                 key={item.id}
@@ -134,15 +136,19 @@ export const HomeScreen = ({ navigation }) => {
             </View>
           )}
         />
-        <SectionName name="New items" />
+
+        <View className={"p-3 flex-1"}>
+          <SectionName name="New items" />
+        </View>
 
         <FlashList
           horizontal
           showsHorizontalScrollIndicator={false}
           showsVerticalScrollIndicator={false}
           data={DATA.articles}
+          ListFooterComponent={() => <View className="pl-4" />}
           renderItem={({ item }) => (
-            <View className="pr-4">
+            <View className="pl-4">
               <ArticleCard
                 backgroundColor="#f4f4f4"
                 key={item.id}
