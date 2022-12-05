@@ -48,7 +48,7 @@ export function PageContainer({ children, pageName }: any) {
         onScroll={scrollHandler}
         scrollEventThrottle={1}
       >
-        <View className="flex-1 pb-16 px-3">{children}</View>
+        <View className="flex-1 mb-6 px-3">{children}</View>
       </Animated.ScrollView>
     </SafeAreaView>
   );

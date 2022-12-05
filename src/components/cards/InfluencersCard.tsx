@@ -16,12 +16,12 @@ export const InfluencersCard = ({
 }: InfluencersCardProps) => {
   return (
     <View className="">
-      <View className="h-40 w-40">
+      <View className="h-48 w-40">
         <CardContainer
           backgroundColor={backgroundColor}
           padding="none"
           role="primary"
-          roundness="xl"
+          roundness="normal"
           size="lg"
           light="center"
         >

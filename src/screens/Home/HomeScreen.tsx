@@ -107,7 +107,7 @@ export const HomeScreen = ({ navigation }) => {
           showsVerticalScrollIndicator={false}
           data={DATA.influencers}
           renderItem={({ item }) => (
-            <View className="h-40 w-40 pr-4">
+            <View className="pr-4">
               <ArticleCard
                 backgroundColor="#f4f4f4"
                 key={item.id}
