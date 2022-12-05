@@ -43,6 +43,36 @@ const DATA = {
       image: require("@assets/images/influencer3.png"),
     },
   ],
+  articles: [
+    {
+      id: "1",
+      name: "Tee shirt - Lacoste",
+      description: "Taille M - Blanc",
+      price: "40",
+      image: require("@assets/images/article.png"),
+    },
+    {
+      id: "2",
+      name: "Album - Oreilles sales",
+      price: "40.40",
+      description: "Edition limité le 12/12/2020",
+      image: require("@assets/images/article1.png"),
+    },
+    {
+      id: "3",
+      name: "Visio 10 minutes",
+      price: "25",
+      description: "Call friendly",
+      image: require("@assets/images/article2.png"),
+    },
+    {
+      id: "4",
+      name: "Image de référence",
+      description: "Et pourquoi pas ??",
+      price: "18.29",
+      image: require("@assets/images/article3.png"),
+    },
+  ],
 };
 
 const SectionName = ({ name }: { name: string }) => {
@@ -105,13 +135,15 @@ export const HomeScreen = ({ navigation }) => {
           horizontal
           showsHorizontalScrollIndicator={false}
           showsVerticalScrollIndicator={false}
-          data={DATA.influencers}
+          data={DATA.articles}
           renderItem={({ item }) => (
             <View className="pr-4">
               <ArticleCard
                 backgroundColor="#f4f4f4"
                 key={item.id}
                 name={item.name}
+                description={item.description}
+                price={item.price + "€"}
                 image={item.image}
               />
             </View>

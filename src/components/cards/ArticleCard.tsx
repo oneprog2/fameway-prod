@@ -3,6 +3,8 @@ import { View, Image } from "react-native";
 
 export type ArticleCardProps = {
   name?: string;
+  description?: string;
+  price?: string;
   image?: any;
   onPress?: () => void;
   backgroundColor?: string;
@@ -11,6 +13,8 @@ export type ArticleCardProps = {
 export const ArticleCard = ({
   name,
   image,
+  description,
+  price,
   onPress,
   backgroundColor,
 }: ArticleCardProps) => {
@@ -35,19 +39,26 @@ export const ArticleCard = ({
       </View>
 
       <View className="pt-1">
-        <Text weight="bold" family="DM" position="center">
+        <Text weight="bold" family="DM" position="left">
           {name}
         </Text>
-      </View>
-      <View className="px-6 pt-3">
-        <Button
-          onPress={onPress}
-          size="sm"
-          label="Follow"
-          role="grey"
-          icon={<CustomIcon size={20} name="plus2" />}
-          roundness="full"
-        />
+        <Text
+          className="pt-1"
+          weight="regular"
+          family="DM"
+          position="left"
+          size="xs"
+        >
+          {description}
+        </Text>
+        <Text
+          className="pt-1 text-grey"
+          weight="bold"
+          family="DM"
+          position="left"
+        >
+          {price}
+        </Text>
       </View>
     </View>
   );
