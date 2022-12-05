@@ -1,6 +1,7 @@
 import {
   ArticleCard,
   Button,
+  CustomIcon,
   HorizontalNavbar,
   NoveltyCard,
   PageContainer,
@@ -99,8 +100,12 @@ const SectionName = ({ name }: { name: string }) => {
 export const HomeScreen = ({ navigation }) => {
   const [first, setfirst] = useState("test");
   return (
-    <PageContainer pageName="Home">
-      <View className="sticky h-14">
+    <PageContainer
+      onPress={() => navigation.navigate("Search")}
+      icon={<CustomIcon name="search" size={30} color="#717171" />}
+      title="Fameway"
+    >
+      <View className="fixed h-14">
         <HorizontalNavbar />
       </View>
       <ScrollView className={"flex-1 p-3"}>

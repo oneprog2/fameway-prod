@@ -55,7 +55,7 @@ export const Light = ({
         <Defs>
           <LinearGradient
             id="a"
-            x1={39.973}
+            x1={34.973}
             y1={15.61}
             x2={39.973}
             y2={76.65}

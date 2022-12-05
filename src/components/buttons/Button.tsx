@@ -9,7 +9,7 @@ import Animated, {
   withTiming,
 } from "react-native-reanimated";
 
-const PRESSED_SCALE = 0.97;
+const PRESSED_SCALE = 0.9;
 
 const buttonClassName = variants("flex flex-row items-center justify-center", {
   variants: {
@@ -18,6 +18,7 @@ const buttonClassName = variants("flex flex-row items-center justify-center", {
       primary: "",
       critical: "",
       grey: "bg-[#f0f0f0]",
+      white: "bg-[#FFFFFF]",
       fameway: "bg-fameway",
     },
     size: {

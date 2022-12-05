@@ -35,6 +35,13 @@ export const ArticleCard = ({
             source={image}
             className={"h-full w-full"}
           ></Image>
+          <Button
+            size="sm"
+            roundness="full"
+            role="white"
+            className="absolute top-2 right-2"
+            icon={<CustomIcon name="heart" size={25} color="#323232" />}
+          />
         </CardContainer>
       </View>
 

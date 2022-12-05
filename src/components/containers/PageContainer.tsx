@@ -1,4 +1,5 @@
-import { Text } from "@components";
+import { Button, CustomIcon, Text, FamewayIcon } from "@components";
+import { useNavigation } from "@react-navigation/native";
 import { Dimensions, SafeAreaView, View } from "react-native";
 import Animated, {
   Extrapolation,
@@ -10,12 +11,21 @@ import Animated, {
 
 const WIDTH = Dimensions.get("window").width;
 
-export function PageContainer({ children, pageName }: any) {
+export function PageContainer({
+  children,
+  icon,
+  title,
+  goBack = false,
+  onPress,
+  isModal,
+}: any) {
   const scrollY = useSharedValue(0);
 
   const scrollHandler = useAnimatedScrollHandler((event) => {
     scrollY.value = event.contentOffset.y;
   });
+
+  const navigation = useNavigation();
 
   const style = useAnimatedStyle(() => {
     const scale = interpolate(scrollY.value, [-400, 0], [2, 1], {
@@ -39,16 +49,39 @@ export function PageContainer({ children, pageName }: any) {
   });
 
   return (
-    <SafeAreaView className="flex-1 bg-light">
-      <Animated.View className="flex-row items-center px-3 h-14" style={style}>
-        <Text className="text-2xl font-bold">{pageName}</Text>
-      </Animated.View>
+    <SafeAreaView className="flex-1 bg-white">
+      <View className="flex-row items-center">
+        <Animated.View
+          className="flex-1 flex-row items-center justify-between px-3 h-14"
+          style={style}
+        >
+          <View className="flex-row items-center">
+            {goBack ? (
+              <Button
+                role="empty"
+                onPress={() => navigation.goBack()}
+                iconOnly
+                icon={
+                  <CustomIcon name="chevron-left" color="white" size="lg" />
+                }
+              />
+            ) : null}
+            <View className={"h-10 w-10"}>
+              <FamewayIcon />
+            </View>
+            <Text className="text-2xl font-bold">{title}</Text>
+          </View>
+          {icon ? (
+            <Button role={"empty"} onPress={onPress} icon={icon} />
+          ) : null}
+        </Animated.View>
+      </View>
       <Animated.ScrollView
         className="flex-1"
         onScroll={scrollHandler}
         scrollEventThrottle={1}
       >
-        <View className="flex-1 mb-6 px-3">{children}</View>
+        <View className={"flex-1"}>{children}</View>
       </Animated.ScrollView>
     </SafeAreaView>
   );

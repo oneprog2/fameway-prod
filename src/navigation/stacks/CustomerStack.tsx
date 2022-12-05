@@ -22,20 +22,8 @@ export const CustomerStackTabs = () => {
         tabBarShowLabel: false,
         tabBarStyle: {
           height: 90,
+          backgroundColor: "white",
         },
-        tabBarBackground: () => (
-          <BlurView
-            tint="light"
-            intensity={70}
-            style={[
-              {
-                borderRadius: 15,
-                overflow: "hidden",
-                ...StyleSheet.absoluteFillObject,
-              },
-            ]}
-          />
-        ),
       }}
     >
       <CustomerStack.Screen
