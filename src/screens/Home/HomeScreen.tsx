@@ -2,6 +2,7 @@ import {
   ArticleCard,
   Button,
   CustomIcon,
+  CollectionCard,
   HorizontalNavbar,
   NoveltyCard,
   PageContainer,
@@ -74,6 +75,37 @@ const DATA = {
       image: require("@assets/images/article3.png"),
     },
   ],
+  collection: {
+    id: "1",
+    name: "SpaceFOX",
+    description:
+      "This incredible collection is made by one of the most popular girl in the world",
+    influencer: {
+      id: "1",
+      name: "Amixem",
+      image: require("@assets/images/influencer3.png"),
+    },
+    articles: [
+      {
+        id: "1",
+        name: "Tee shirt - Lacoste",
+        price: "40",
+        image: require("@assets/images/article.png"),
+      },
+      {
+        id: "2",
+        name: "Album - Oreilles sales",
+        price: "40.40",
+        image: require("@assets/images/article1.png"),
+      },
+      {
+        id: "3",
+        name: "Visio 10 minutes",
+        price: "25",
+        image: require("@assets/images/article2.png"),
+      },
+    ],
+  },
 };
 
 const SectionName = ({ name }: { name: string }) => {
@@ -148,7 +180,7 @@ export const HomeScreen = ({ navigation }) => {
           data={DATA.articles}
           ListFooterComponent={() => <View className="pl-4" />}
           renderItem={({ item }) => (
-            <View className="pl-4">
+            <View className="pl-4 flex-1">
               <ArticleCard
                 backgroundColor="#f4f4f4"
                 key={item.id}
@@ -160,6 +192,15 @@ export const HomeScreen = ({ navigation }) => {
             </View>
           )}
         />
+        <View className={"flex-1 p-4 py-10"}>
+          <CollectionCard
+            backgroundColor="#fb4e7c"
+            name={DATA.collection?.name}
+            description={DATA.collection?.description}
+            articles={DATA.collection?.articles}
+            influencer={DATA.collection?.influencer}
+          />
+        </View>
       </ScrollView>
     </PageContainer>
   );

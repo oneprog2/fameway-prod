@@ -40,6 +40,10 @@ const buttonClassName = variants("flex flex-row items-center justify-center", {
       true: "",
       false: "",
     },
+    shadow: {
+      true: "shadow",
+      false: "",
+    },
   },
   compoundVariants: [
     {
@@ -146,6 +150,7 @@ export function Button(props: ButtonProps) {
     disabled = false,
     onPress = () => {},
     children,
+    shadow,
     ...rest
   } = props;
   const scale = useSharedValue(1);
@@ -177,6 +182,7 @@ export function Button(props: ButtonProps) {
           roundness,
           disabled,
           iconOnly,
+          shadow,
         })}
         style={buttonStyle}
       >

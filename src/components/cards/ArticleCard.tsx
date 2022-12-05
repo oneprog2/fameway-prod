@@ -8,6 +8,9 @@ export type ArticleCardProps = {
   image?: any;
   onPress?: () => void;
   backgroundColor?: string;
+  position?: "left" | "center" | "right";
+  size?: "sm" | "md" | "flex";
+  wishlistButton?: boolean;
 };
 
 export const ArticleCard = ({
@@ -15,12 +18,15 @@ export const ArticleCard = ({
   image,
   description,
   price,
+  size,
+  wishlistButton,
   onPress,
+  position = "left",
   backgroundColor,
 }: ArticleCardProps) => {
   return (
-    <View className="">
-      <View className="h-48 w-40">
+    <View className="w-full h-full flex-1">
+      <View className={size === "flex" ? "flex-1 w-full h-full" : "h-48 w-40"}>
         <CardContainer
           backgroundColor={backgroundColor}
           padding="none"
@@ -35,37 +41,52 @@ export const ArticleCard = ({
             source={image}
             className={"h-full w-full"}
           ></Image>
-          <Button
-            size="sm"
-            roundness="full"
-            role="white"
-            className="absolute top-2 right-2"
-            icon={<CustomIcon name="heart" size={25} color="#323232" />}
-          />
+          {wishlistButton ? (
+            <Button
+              size="sm"
+              roundness="full"
+              role="white"
+              shadow
+              className="absolute top-2 right-2"
+              icon={<CustomIcon name="heart" size={25} color="#323232" />}
+            />
+          ) : null}
         </CardContainer>
       </View>
 
       <View className="pt-1">
-        <Text weight="bold" family="DM" position="left">
-          {name}
-        </Text>
-        <Text
-          className="pt-1"
-          weight="regular"
-          family="DM"
-          position="left"
-          size="xs"
-        >
-          {description}
-        </Text>
-        <Text
-          className="pt-1 text-grey"
-          weight="bold"
-          family="DM"
-          position="left"
-        >
-          {price}
-        </Text>
+        {name ? (
+          <Text
+            weight="bold"
+            size={description ? "md" : "sm"}
+            family="DM"
+            position={position}
+          >
+            {name}
+          </Text>
+        ) : null}
+        {description ? (
+          <Text
+            className="pt-1"
+            weight="regular"
+            family="DM"
+            position={position}
+            size="xs"
+          >
+            {description}
+          </Text>
+        ) : null}
+        {price ? (
+          <Text
+            className="pt-1 text-grey"
+            weight={description ? "bold" : "light"}
+            size={description ? "md" : "sm"}
+            family="DM"
+            position={position}
+          >
+            {price}
+          </Text>
+        ) : null}
       </View>
     </View>
   );

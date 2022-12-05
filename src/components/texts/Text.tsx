@@ -20,6 +20,7 @@ const textClassName = variants("", {
       sm: "text-sm",
       md: "text-base",
       lg: "text-lg",
+      xl: "text-xl",
       xxl: "text-2xl",
     },
     weight: {
