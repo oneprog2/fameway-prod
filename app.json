@@ -4,6 +4,10 @@
       "image": "./src/assets/images/splash.png",
       "backgroundColor": "#222222",
       "resizeMode": "contain"
+    },
+    "userInterfaceStyle": "automatic",
+    "android": {
+      "userInterfaceStyle": "automatic"
     }
   }
 }
