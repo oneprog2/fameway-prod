@@ -8,8 +8,6 @@ import {
 } from "@screens";
 import { createBottomSheetNavigator } from "@th3rdwave/react-navigation-bottom-sheet";
 import { CartTabButton, CustomIcon, TabBarIcon } from "@components";
-import { BlurView } from "expo-blur";
-import { StyleSheet, View } from "react-native";
 
 const CustomerStack = createBottomTabNavigator();
 const BottomSheet = createBottomSheetNavigator();

@@ -5,6 +5,7 @@
       "backgroundColor": "#222222",
       "resizeMode": "contain"
     },
+    "scheme": "fameway",
     "userInterfaceStyle": "automatic",
     "android": {
       "userInterfaceStyle": "automatic"
