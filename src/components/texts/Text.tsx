@@ -1,50 +1,86 @@
-import {
-  createUseStyles,
-  useTheme,
-  ThemeType,
-  ParagraphSizeTypes,
-} from "@styles";
-import { StyleProp, Text as TextComponent, TextStyle } from "react-native";
+import { variants, VariantsProps } from "nativewind";
+import { Text as TextBase, TextProps as TextPropsBase } from "react-native";
 
-interface DataProps {
-  children: React.ReactNode;
-}
-
-interface ContextProps {
-  theme?: ThemeType;
-  color?: string;
-  size?: keyof ParagraphSizeTypes;
-  weight?: "normal" | "bold";
-  position?: "left" | "center" | "right";
-  family?: string;
-}
-
-interface StyleTypes {
-  textStyle: StyleProp<TextStyle>;
-}
-
-export const Text: React.FC<DataProps & ContextProps> = ({
-  children,
-  color,
-  size,
-  weight,
-  family = "Oblivian-Regular",
-  position = "center",
-}) => {
-  const theme = useTheme();
-  const styles = useStyles({ theme, color, size, weight, position, family });
-
-  return <TextComponent style={styles.textStyle}>{children}</TextComponent>;
-};
-
-const getStyles = (context: ContextProps): StyleTypes => ({
-  textStyle: {
-    color: context.color || "black",
-    fontSize: context.theme?.fonts.fontSize.paragraph[context.size || "t3"],
-    fontWeight: context?.weight || "bold",
-    fontFamily: context?.family,
-    textAlign: context?.position,
+const textClassName = variants("", {
+  variants: {
+    color: {
+      white: "text-white",
+      neutral: "text-neutral-12",
+      "neutral-faded": "text-neutral-11",
+      "neutral-muted": "text-neutral-9",
+      "neutral-disabled": "text-neutral-6",
+      dark: "text-neutral-3",
+      positive: "text-positive-9",
+      critical: "text-critical-9",
+      none: "",
+    },
+    size: {
+      "2xs": "text-[10px]",
+      xs: "text-xs",
+      sm: "text-sm",
+      md: "text-base",
+      lg: "text-lg",
+      xl: "text-xl",
+      xxl: "text-2xl",
+    },
+    weight: {
+      bold: "font-bold",
+      thin: "font-thin",
+      light: "font-light",
+      regular: "font-regular",
+    },
+    family: {
+      DM: "",
+      Oblivian: "",
+    },
+    position: {
+      center: "text-center",
+      left: "text-left",
+      right: "text-right",
+    },
   },
+  compoundVariants: [
+    {
+      weight: "bold",
+      family: "DM",
+      className: "font-boldDM",
+    },
+    {
+      weight: "regular",
+      family: "DM",
+      className: "font-mediumDM",
+    },
+    {
+      weight: "regular",
+      family: "DM",
+      className: "font-regularDM",
+    },
+  ],
 });
 
-const useStyles = createUseStyles(getStyles);
+export type TextProps = VariantProps<typeof textClassName> &
+  TextPropsBase & {
+    className?: string;
+  };
+
+export function Text(props: TextProps) {
+  const {
+    color,
+    size = "md",
+    position = "center",
+    weight = "medium",
+    family = "Oblivian",
+  } = props;
+  return (
+    <TextBase
+      {...props}
+      className={textClassName({
+        color,
+        size,
+        position,
+        weight,
+        family,
+      })}
+    />
+  );
+}

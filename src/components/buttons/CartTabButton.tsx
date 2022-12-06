@@ -1,8 +1,6 @@
 import { createUseStyles, useTheme, ThemeType } from "@styles";
 import { View, StyleProp, ViewStyle, PressableProps } from "react-native";
 import { Button } from "@components";
-import { useNavigation } from "@react-navigation/native";
-import { useRoute } from "@react-navigation/native";
 
 interface DataProps {
   children: React.ReactNode;
@@ -40,24 +38,25 @@ export const CartTabButton: React.FC<DataProps & ContextProps> = ({
       ]}
     >
       <Button
+        role="fameway"
         size={"none"}
-        backgroundColor="#FFCE00"
-        rounded="full"
+        roundness="full"
         onPress={onPress}
-      >
-        <View
-          style={[
-            styles.containerStyle,
-            {
-              justifyContent: "center",
-              alignItems: "center",
-              bottom: 10,
-            },
-          ]}
-        >
-          {children}
-        </View>
-      </Button>
+        iconOnly
+        icon={
+          <View
+            style={[
+              styles.containerStyle,
+              {
+                justifyContent: "center",
+                alignItems: "center",
+              },
+            ]}
+          >
+            {children}
+          </View>
+        }
+      ></Button>
     </View>
   );
 };

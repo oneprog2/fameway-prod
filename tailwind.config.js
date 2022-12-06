@@ -27,8 +27,6 @@ function createSystemColors(colors) {
       {}
     ),
     ...createSystemColor("neutral-a", `${colors.neutral}A`),
-    white: "#FFFFFF",
-    black: "#000000",
   };
 }
 
@@ -67,15 +65,20 @@ const theme = {
   variables: darkThemeVariables,
   darkVariables: darkThemeVariables,
   fontFamily: {
-    "sans-regular": ["SpaceGrotesk-Regular"],
-    "sans-medium": ["SpaceGrotesk-Medium"],
-    "sans-bold": ["SpaceGrotesk-Bold"],
-    "mono-regular": ["SpaceMono-Regular"],
-    "mono-bold": ["SpaceMono-Bold"],
+    regular: ["Oblivian-Regular"],
+    bold: ["Oblivian-Bold"],
+    thin: ["Oblivian-Thin"],
+    light: ["Oblivian-Light"],
+    regularDM: ["DM-Regular"],
+    mediumDM: ["DM-Medium"],
+    boldDM: ["DM-Bold"],
     tabular: ["System"],
   },
   extend: {
     colors: {
+      light: "#FFFFFF",
+      dark: "#000000",
+      fameway: "#ffce00",
       ...variablesToTheme(darkThemeVariables),
     },
   },
