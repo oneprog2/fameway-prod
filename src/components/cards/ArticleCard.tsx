@@ -58,7 +58,7 @@ export const ArticleCard = ({
         {name ? (
           <Text
             weight="bold"
-            size={description ? "md" : "sm"}
+            size={description ? "md" : "xs"}
             family="DM"
             position={position}
           >
