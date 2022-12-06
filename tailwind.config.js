@@ -86,10 +86,12 @@ const theme = {
 
 module.exports = {
   content: [
+    "./App.tsx",
     "./tailwind.config.js",
     "./App.{js,jsx,ts,tsx}",
     "./<custom directory>/**/*.{js,jsx,ts,tsx}",
     "./src/**/*.{js,jsx,ts,tsx}",
+    "./src/**/*.{html,js}",
   ],
   theme,
   presets: [nativewind],
