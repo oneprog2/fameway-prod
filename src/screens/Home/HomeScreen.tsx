@@ -228,13 +228,13 @@ export const HomeScreen = ({ navigation }) => {
         />
 
         <View className={"flex-1 p-4 pt-10"}>
-          {/* <CollectionCard
+          <CollectionCard
             backgroundColor="#fb4e7c"
             name={DATA.collection?.name}
             description={DATA.collection?.description}
             articles={DATA.collection?.articles}
             influencer={DATA.collection?.influencer}
-          /> */}
+          />
         </View>
 
         <View className={"px-3 flex-1"}>
