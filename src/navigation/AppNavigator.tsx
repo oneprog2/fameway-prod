@@ -2,18 +2,20 @@ import {
   NavigationContainer,
   DefaultTheme,
   DarkTheme,
+  createNavigationContainerRef,
 } from "@react-navigation/native";
 import { HomeScreen, PresentationScreen } from "@screens";
 import { useColorScheme } from "react-native";
 import { useGetOnboardingStatus } from "@hooks";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { AuthStackNavigator, CustomerStackNavigator } from "@navigation";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import * as Linking from "expo-linking";
 
 const prefix = Linking.createURL("/");
 
 const Stack = createNativeStackNavigator();
+const navigationRef = createNavigationContainerRef();
 
 export const AppNavigator = () => {
   const scheme = useColorScheme();
@@ -40,9 +42,15 @@ export const AppNavigator = () => {
       },
     },
   };
+  const [routeName, setRouteName] = useState();
 
   return (
     <NavigationContainer
+      ref={navigationRef}
+      onStateChange={async () => {
+        const currentRouteName = navigationRef.getCurrentRoute().name;
+        setRouteName(currentRouteName);
+      }}
       theme={scheme === "dark" ? DarkTheme : DefaultTheme}
       linking={linking}
     >
@@ -75,12 +83,13 @@ export const AppNavigator = () => {
             );
           else
             return (
-              <>
+              <Stack.Group>
                 <Stack.Screen
+                  routeName={routeName}
                   name="CustomerStack"
                   component={CustomerStackNavigator}
                 />
-              </>
+              </Stack.Group>
             );
         })()}
       </Stack.Navigator>

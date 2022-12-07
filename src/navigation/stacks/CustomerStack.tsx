@@ -1,18 +1,17 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import {
   HomeScreen,
-  LoginScreen,
   ProfileScreen,
   SearchScreen,
   WishlistScreen,
+  CartScreen,
 } from "@screens";
-import { createBottomSheetNavigator } from "@th3rdwave/react-navigation-bottom-sheet";
 import { CartTabButton, CustomIcon, TabBarIcon } from "@components";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 const CustomerStack = createBottomTabNavigator();
-const BottomSheet = createBottomSheetNavigator();
 
-export const CustomerStackTabs = () => {
+export const CustomerStackTabs = ({ navigation }) => {
   return (
     <CustomerStack.Navigator
       screenOptions={{
@@ -62,7 +61,14 @@ export const CustomerStackTabs = () => {
               size="30"
             />
           ),
-          tabBarButton: (props) => <CartTabButton {...props} />,
+          tabBarButton: (props) => (
+            <CartTabButton
+              {...props}
+              onPress={() => {
+                navigation.navigate("Cart");
+              }}
+            />
+          ),
         }}
       />
       <CustomerStack.Screen
@@ -95,23 +101,20 @@ export const CustomerStackTabs = () => {
   );
 };
 
-export const CustomerStackNavigator = () => {
-  return (
-    <BottomSheet.Navigator>
-      <BottomSheet.Screen
-        name="CustomerStackTabs"
-        component={CustomerStackTabs}
-      />
+const Stack = createNativeStackNavigator();
 
-      <BottomSheet.Screen
-        name="firstSheet"
-        component={LoginScreen}
-        options={{
-          snapPoints: [200, 400],
-          bottomInset: 100,
-          detached: true,
+export const CustomerStackNavigator = (props) => {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="CustomerStack" component={CustomerStackTabs} />
+      <Stack.Group
+        screenOptions={{
+          presentation: "transparentModal",
+          headerShown: false,
         }}
-      />
-    </BottomSheet.Navigator>
+      >
+        <Stack.Screen key="Cart" name="Cart" component={CartScreen} />
+      </Stack.Group>
+    </Stack.Navigator>
   );
 };
