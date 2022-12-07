@@ -22,7 +22,7 @@ export const ArticleCard = ({
   wishlistButton,
   onPress,
   position = "left",
-  backgroundColor,
+  backgroundColor = "#f4f4f4",
 }: ArticleCardProps) => {
   return (
     <View className="w-full h-full flex-1">

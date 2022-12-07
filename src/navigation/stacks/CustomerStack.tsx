@@ -49,9 +49,7 @@ export const CustomerStackTabs = ({ navigation }) => {
         name="Cart"
         component={HomeScreen}
         listeners={{
-          tabPress: (e) => {
-            e.preventDefault();
-          },
+          tabPress: (e) => {},
         }}
         options={{
           tabBarIcon: ({ focused }) => (
@@ -106,7 +104,13 @@ const Stack = createNativeStackNavigator();
 export const CustomerStackNavigator = (props) => {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="CustomerStack" component={CustomerStackTabs} />
+      <Stack.Screen
+        options={{
+          headerShown: false,
+        }}
+        name="CustomerStack"
+        component={CustomerStackTabs}
+      />
       <Stack.Group
         screenOptions={{
           presentation: "transparentModal",
