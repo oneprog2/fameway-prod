@@ -9,19 +9,18 @@ export function CartScreen({ navigation }) {
   return (
     <View
       className="h-full w-full px-5 justify-end content-end"
-      onTouchStart={(e) => setTouchY(e.nativeEvent.pageY)}
       onTouchEnd={(e) => {
-        if (touchY - e.nativeEvent.pageY < 20) navigation.goBack();
+        navigation.goBack();
       }}
     >
       <View
+        onTouchStart={(e) => setTouchY(e.nativeEvent.pageY)}
+        onTouchEnd={(e) => {
+          if (e.nativeEvent.pageY - touchY > 20) navigation.goBack();
+        }}
         style={{ padding: 50 }}
         className="rounded-xl  h-20 w-full mb-32 bg-white shadow-lg"
       />
-      {/* <View
-        pointerEvents="none"
-        className="h-28 w-full absolute bottom-1 content-self-end"
-      /> */}
     </View>
   );
 }
