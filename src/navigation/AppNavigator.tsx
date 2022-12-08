@@ -79,11 +79,11 @@ export const AppNavigator = () => {
           else
             return (
               <Stack.Group>
-                <Stack.Screen
+                {/* <Stack.Screen
                   name="CustomerStack"
                   component={CustomerStackNavigator}
-                />
-                <Stack.Screen name="StoreScreen" component={StoreScreen} />
+                /> */}
+                <Stack.Screen name="Store" component={StoreScreen} />
               </Stack.Group>
             );
         })()}

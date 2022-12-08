@@ -162,7 +162,6 @@ const SectionName = ({ name }: { name: string }) => {
 };
 
 export const HomeScreen = ({ navigation }) => {
-  const [first, setfirst] = useState("test");
   return (
     <PageContainer
       onPress={() => navigation.navigate("Search")}
@@ -193,6 +192,7 @@ export const HomeScreen = ({ navigation }) => {
           renderItem={({ item }) => (
             <View className="pl-4">
               <InfluencersCard
+                onPress={() => navigation.navigate("Store", { item: item })}
                 backgroundColor="#f4f4f4"
                 key={item.id}
                 name={item.name}

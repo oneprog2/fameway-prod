@@ -62,7 +62,7 @@ export const ArticleCard = ({
             family="DM"
             position={position}
           >
-            {name}
+            {name}®
           </Text>
         ) : null}
         {description ? (

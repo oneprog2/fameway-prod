@@ -62,14 +62,18 @@ export function PageContainer({
                 onPress={() => navigation.goBack()}
                 iconOnly
                 icon={
-                  <CustomIcon name="chevron-left" color="white" size="lg" />
+                  <CustomIcon name="chevron-left" color="black" size={40} />
                 }
               />
             ) : null}
-            <View className={"h-10 w-10"}>
-              <FamewayIcon />
-            </View>
-            <Text className="text-2xl font-bold">{title}</Text>
+            {title === "Fameway" ? (
+              <View className={"h-10 w-10"}>
+                <FamewayIcon />
+              </View>
+            ) : null}
+            <Text weight="bold" className="text-2xl">
+              {title}
+            </Text>
           </View>
           {icon ? (
             <Button role={"empty"} onPress={onPress} icon={icon} />

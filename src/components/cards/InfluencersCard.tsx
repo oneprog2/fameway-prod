@@ -18,6 +18,7 @@ export const InfluencersCard = ({
     <View className="h-fit w-full">
       <View className="h-48 w-40">
         <Button
+          onPress={onPress}
           size="full"
           role="empty"
           iconOnly

@@ -1,0 +1,58 @@
+import { Image, View } from "react-native";
+import { Text, Button, CustomIcon } from "@components";
+
+export type StoreHeaderProps = {
+  name?: string;
+  description?: string;
+  bannerPicture?: string;
+  profilePicture?: string;
+  onPress?: () => void;
+};
+
+export const StoreHeader = ({
+  name,
+  description,
+  bannerPicture,
+  profilePicture,
+  onPress,
+}: StoreHeaderProps) => {
+  return (
+    <View className="flex-1 rounded-full">
+      <View className="flex-1">
+        <Image
+          resizeMode="cover"
+          className="h-full w-full rounded-2xl"
+          source={require("@assets/images/storeBanner.png")}
+        />
+      </View>
+
+      <View className="flex-row h-16">
+        <View className="left-4 -top-10  p-1 w-28 h-28 rounded-full bg-white ">
+          <Image
+            resizeMode="contain"
+            className="h-full w-full rounded-full bg-black"
+            source={require("@assets/images/influencer2.png")}
+          />
+        </View>
+
+        <View className="ml-6 pr-1 flex-row flex-1">
+          <View className="flex-1 justify-center">
+            <Text position={"left"} size="xl" weight="bold">
+              Amixem
+            </Text>
+            <Text position={"left"} size="sm" weight="light">
+              @amixem
+            </Text>
+          </View>
+          <View className="flex-1  justify-center">
+            <Button
+              roundness={"full"}
+              label="Follow"
+              icon={<CustomIcon color="white" size={20} name={"plus2"} />}
+            />
+          </View>
+        </View>
+      </View>
+    </View>
+  );
+};
