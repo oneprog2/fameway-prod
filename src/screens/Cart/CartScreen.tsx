@@ -10,9 +10,13 @@ import { useState } from "react";
 import { View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 
-function SellerHeader() {
+function SellerHeader({ first }: { first?: boolean }) {
   return (
-    <View className="w-full flex-row border-t-[1px]  border-[#E6E6E6] pt-2">
+    <View
+      className={`w-full flex-row  ${
+        first ? "pt-2" : "pt-4 border-t-[1px] border-[#E6E6E6]"
+      }`}
+    >
       <View className="flex-1">
         <Avatar
           size={34}
@@ -31,6 +35,7 @@ function SellerHeader() {
 
 function ArticleItem() {
   const [quantity, setQuantity] = useState(0);
+  const [deleteConfirmation, setDeleteConfirmation] = useState(false);
 
   return (
     <View className="flex-row mt-5">
@@ -60,22 +65,36 @@ function ArticleItem() {
 
         <View className="flex-row items-center justify-end">
           <View className="flex-1 items-end pr-2">
-            <View className="w-8 h-8">
+            {!deleteConfirmation ? (
+              <View className="w-8 h-8">
+                <Button
+                  onPress={() => setDeleteConfirmation(true)}
+                  size={"full"}
+                  roundness="full"
+                  role="grey"
+                  icon={<CustomIcon size={18} name="trash" />}
+                ></Button>
+              </View>
+            ) : (
               <Button
-                size={"full"}
+                onPress={() => setDeleteConfirmation(false)}
+                size="sm"
                 roundness="full"
-                role="grey"
-                icon={<CustomIcon size={18} name="trash" />}
+                label="Supprimer"
+                role="critical"
+                icon={<CustomIcon color="white" size={18} name="trash" />}
               ></Button>
+            )}
+          </View>
+          {!deleteConfirmation ? (
+            <View className="w-[85px]">
+              <QuantitySelector
+                quantity={quantity}
+                onDecrement={() => quantity > 0 && setQuantity(quantity - 1)}
+                onIncrement={() => quantity < 20 && setQuantity(quantity + 1)}
+              />
             </View>
-          </View>
-          <View className="w-[85px]">
-            <QuantitySelector
-              quantity={quantity}
-              onDecrement={() => quantity > 0 && setQuantity(quantity - 1)}
-              onIncrement={() => quantity < 20 && setQuantity(quantity + 1)}
-            />
-          </View>
+          ) : null}
         </View>
       </View>
     </View>
@@ -84,7 +103,7 @@ function ArticleItem() {
 
 export function TotalAmount() {
   return (
-    <View className="flex-row w-full absolute bottom-2 bg-white pt-2">
+    <View className="flex-row w-full absolute bottom-2 bg-white py-3">
       <View className="flex-1">
         <View className="flex-1">
           <Text family="DM" position="left" weight="bold" color="neutral-muted">
@@ -112,9 +131,13 @@ export function TotalAmount() {
   );
 }
 
-export function Subtotal() {
+export function Subtotal({ last }: { last?: boolean }) {
   return (
-    <View className="flex-row w-full border-b-[1px] border-[#E6E6E6] p-1 mt-3">
+    <View
+      className={`flex-row w-full mt-3 ${
+        last ? "border-b-[1px] border-[#E6E6E6] pb-3" : ""
+      }`}
+    >
       <View className="flex-1">
         <Text family="DM" position="left" weight="light" color="neutral-muted">
           Sub-total
@@ -132,7 +155,7 @@ export function Subtotal() {
 
 export function CartScreen({ closeCart }: { closeCart?: () => void }) {
   return (
-    <View className="flex-1 m-4 pb-5">
+    <View className="flex-1 mx-4 mt-4 pb-5">
       <View className="flex-row">
         <View className="flex-1 pl-1 pb-5 pt-2">
           <View className="flex-row">
@@ -161,11 +184,11 @@ export function CartScreen({ closeCart }: { closeCart?: () => void }) {
       </View>
 
       <ScrollView
-        className="mb-12"
+        className="mb-20"
         showsVerticalScrollIndicator={false}
         showsHorizontalScrollIndicator={false}
       >
-        <SellerHeader />
+        <SellerHeader first />
         <View className="mb-3">
           <ArticleItem />
           <ArticleItem />
@@ -187,7 +210,7 @@ export function CartScreen({ closeCart }: { closeCart?: () => void }) {
         <View className="mb-3">
           <ArticleItem />
           <ArticleItem />
-          <Subtotal />
+          <Subtotal last />
         </View>
       </ScrollView>
       <TotalAmount />
