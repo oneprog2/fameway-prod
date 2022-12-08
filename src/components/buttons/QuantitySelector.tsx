@@ -13,35 +13,35 @@ export const QuantitySelector = ({
   onDecrement,
 }: QuantitySelectorProps) => {
   return (
-    <View className="flex-row w-32 rounded-full bg-[#f0f0f0]">
-      <View className="pr-2">
+    <View className="flex-row bg-[#f0f0f0]">
+      <View className="flex-1">
         <Button
           roundness="full"
           role="empty"
           className="p-1"
           icon={
-            <View className="w-14 h-10 rounded-full justify-center items-center">
-              <CustomIcon size={24} name="minus" />
+            <View className="w-full h-full bg-white rounded-full justify-center items-center">
+              <CustomIcon size={14} name="minus" />
             </View>
           }
           onPress={onDecrement}
         ></Button>
       </View>
 
-      <View className="flex-1 justify-center">
+      <View className="flex-1 justify-center bg-red-200">
         <Text size="md" weight="bold" position="center">
           {quantity}
         </Text>
       </View>
 
-      <View className="pl-2">
+      <View className="flex-1 bg-red-400">
         <Button
           roundness="full"
           role="white"
           className="p-1"
           icon={
-            <View className="w-14 h-10 rounded-full justify-center items-center">
-              <CustomIcon size={24} name="plus2" />
+            <View className="w-full h-full rounded-full justify-center items-center">
+              <CustomIcon size={14} name="plus2" />
             </View>
           }
           onPress={onIncrement}

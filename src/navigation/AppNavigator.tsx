@@ -85,7 +85,6 @@ export const AppNavigator = () => {
             return (
               <Stack.Group>
                 <Stack.Screen
-                  routeName={routeName}
                   name="CustomerStack"
                   component={CustomerStackNavigator}
                 />

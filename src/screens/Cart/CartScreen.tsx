@@ -11,7 +11,7 @@ import { View } from "react-native";
 
 function SellerHeader() {
   return (
-    <View className="w-full p-3 flex-row">
+    <View className="w-full flex-row">
       <View className="flex-1">
         <Avatar
           size={34}
@@ -22,7 +22,7 @@ function SellerHeader() {
         />
       </View>
       <View className="justify-center">
-        <Text>Un code promo ?</Text>
+        <Text size="sm">Un code promo ?</Text>
       </View>
     </View>
   );
@@ -32,8 +32,8 @@ function ArticleItem() {
   const [quantity, setQuantity] = useState(0);
 
   return (
-    <View className="flex-row p-3">
-      <View className="w-24 h-28">
+    <View className="flex-row mt-5">
+      <View className="w-24 h-32">
         <ArticleCard
           size={"flex"}
           image={require("@assets/images/article1.png")}
@@ -56,16 +56,13 @@ function ArticleItem() {
             </View>
           </View>
         </View>
-        <View className="flex-row justify-end pl-10">
-          <View className="pr-4">
+
+        <View className="flex-row items-center justify-end">
+          <View className="flex-1 items-end pr-2">
             <Button
               roundness="full"
-              role="empty"
-              icon={
-                <View className="w-14 h-10 rounded-full bg-[#f0f0f0] justify-center items-center">
-                  <CustomIcon size={24} name="trash" />
-                </View>
-              }
+              role="grey"
+              icon={<CustomIcon size={18} name="trash" />}
             ></Button>
           </View>
           <View className="flex-1">
@@ -81,48 +78,86 @@ function ArticleItem() {
   );
 }
 
-export function CartScreen({ navigation }) {
-  const [touchY, setTouchY] = useState(0);
-
+export function TotalAmount() {
   return (
-    <View
-      className="h-full w-full px-3 justify-end content-end"
-      // onTouchEnd={(e) => {
-      //   navigation.goBack();
-      // }}
-    >
-      <View
-        // onTouchStart={(e) => setTouchY(e.nativeEvent.pageY)}
-        // onTouchEnd={(e) => {
-        //   if (e.nativeEvent.pageY - touchY > 20) navigation.goBack();
-        // }}
-        className="rounded-xl w-full mb-32 bg-white shadow-lg p-2"
-      >
-        <View className="flex-row">
-          <View className="flex-1 pl-5 p-6">
-            <Text
-              position="left"
-              weight="bold"
-              family="DM"
-              size="xxl"
-              color="black"
-            >
-              Cart
-            </Text>
-          </View>
-          <View className="align-end p-3">
-            <Button
-              roundness="full"
-              iconOnly
-              role="grey"
-              icon={<CustomIcon name="close" size={30} />}
-            />
-          </View>
+    <View className="flex-row w-full absolute bottom-1">
+      <View className="flex-1">
+        <View className="flex-1">
+          <Text family="DM" position="left" weight="bold" color="neutral-muted">
+            Total
+          </Text>
         </View>
 
-        <SellerHeader />
-        <ArticleItem />
+        <View className="flex-1">
+          <Text family="DM" size="xl" position="left" weight="bold">
+            500.00 €
+          </Text>
+        </View>
       </View>
+      <View className="flex-1">
+        <Button
+          label="Checkout"
+          role="normal"
+          size="lg"
+          roundness="full"
+          onPress={() => {}}
+          iconOnly
+        ></Button>
+      </View>
+    </View>
+  );
+}
+
+export function Subtotal() {
+  return (
+    <View className="flex-row w-full border-b-[1px] border-[#E6E6E6] p-1">
+      <View className="flex-1">
+        <Text family="DM" position="left" weight="light" color="neutral-muted">
+          Sub-total
+        </Text>
+      </View>
+
+      <View>
+        <Text family="DM" size="lg" position="left" weight="bold">
+          90 €
+        </Text>
+      </View>
+    </View>
+  );
+}
+
+export function CartScreen({ closeCart }: { closeCart?: () => void }) {
+  return (
+    <View className="flex-1 m-4 mb-5">
+      <View className="flex-row">
+        <View className="flex-1 pl-6 py-5">
+          <Text
+            position="left"
+            weight="bold"
+            family="DM"
+            size="xxl"
+            color="black"
+          >
+            Cart
+          </Text>
+        </View>
+        <View className="align-end p-2">
+          <Button
+            onPress={closeCart}
+            roundness="full"
+            iconOnly
+            role="grey"
+            icon={<CustomIcon name="close" size={30} />}
+          />
+        </View>
+      </View>
+      <SellerHeader />
+      <View className="mb-3">
+        <ArticleItem />
+        <Subtotal />
+      </View>
+
+      <TotalAmount />
     </View>
   );
 }

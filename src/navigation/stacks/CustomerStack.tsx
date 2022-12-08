@@ -11,7 +11,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 const CustomerStack = createBottomTabNavigator();
 
-export const CustomerStackTabs = ({ navigation }) => {
+export const CustomerStackNavigator = () => {
   return (
     <CustomerStack.Navigator
       screenOptions={{
@@ -56,17 +56,10 @@ export const CustomerStackTabs = ({ navigation }) => {
             <CustomIcon
               name="shopping-bag-converted"
               color="#4f4f4f"
-              size="30"
+              size={30}
             />
           ),
-          tabBarButton: (props) => (
-            <CartTabButton
-              {...props}
-              onPress={() => {
-                navigation.navigate("Cart");
-              }}
-            />
-          ),
+          tabBarButton: (props) => <CartTabButton {...props} />,
         }}
       />
       <CustomerStack.Screen
@@ -96,29 +89,5 @@ export const CustomerStackTabs = ({ navigation }) => {
         component={ProfileScreen}
       />
     </CustomerStack.Navigator>
-  );
-};
-
-const Stack = createNativeStackNavigator();
-
-export const CustomerStackNavigator = (props) => {
-  return (
-    <Stack.Navigator>
-      <Stack.Screen
-        options={{
-          headerShown: false,
-        }}
-        name="CustomerStack"
-        component={CustomerStackTabs}
-      />
-      <Stack.Group
-        screenOptions={{
-          presentation: "transparentModal",
-          headerShown: false,
-        }}
-      >
-        <Stack.Screen key="Cart" name="Cart" component={CartScreen} />
-      </Stack.Group>
-    </Stack.Navigator>
   );
 };
