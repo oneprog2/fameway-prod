@@ -163,15 +163,8 @@ const SectionName = ({ name }: { name: string }) => {
 };
 
 export const StoreScreen = ({ route, navigation }) => {
-  // const { item, otherParam } = route.params;
-  // console.warn(item);
   return (
-    <PageContainer
-      goBack
-      onPress={() => navigation.navigate("Search")}
-      icon={<CustomIcon name="search" size={30} color="#717171" />}
-      title={"Amixem"}
-    >
+    <PageContainer goBack title={"Amixem"}>
       <ScrollView className={"flex-1"}>
         <View className="p-4 h-80 flex-1">
           <StoreHeader />
