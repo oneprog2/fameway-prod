@@ -5,6 +5,8 @@ import * as SplashScreen from "expo-splash-screen";
 import { View } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import "./styles.css";
+import "react-native-gesture-handler";
+import { PortalProvider } from "@gorhom/portal";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -32,8 +34,10 @@ function App() {
 
   return (
     <View style={{ flex: 1 }} onLayout={onLayoutRootView}>
-      <StatusBar style="dark" />
-      <AppNavigator />
+      <PortalProvider>
+        <StatusBar style="dark" />
+        <AppNavigator />
+      </PortalProvider>
     </View>
   );
 }

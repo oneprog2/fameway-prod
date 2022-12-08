@@ -6,3 +6,4 @@ export * from "./layouts";
 export * from "./navbar";
 export * from "./cards";
 export * from "./containers";
+export * from "./images";

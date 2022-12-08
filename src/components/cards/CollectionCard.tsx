@@ -1,4 +1,4 @@
-import { CardContainer, ArticleCard, Text, Button } from "@components";
+import { CardContainer, ArticleCard, Text, Button, Avatar } from "@components";
 import { Image, View } from "react-native";
 
 export type CollectionCardProps = {
@@ -38,22 +38,15 @@ export const CollectionCard = ({
       size="lg"
       light="left"
     >
-      <View className="h-full flex-1">
-        <View className="flex-row p-8 items-center">
-          <Image
-            resizeMode="contain"
-            className="h-12 w-12 rounded-full bg-neutral-100"
-            source={influencer?.image}
+      <View className="h-full flex-1 ">
+        <View className="p-8">
+          <Avatar
+            textColor="white"
+            influencer={{
+              name: influencer?.name,
+              image: influencer?.image,
+            }}
           />
-          <Text
-            className="pl-3"
-            color="white"
-            size="xl"
-            weight="bold"
-            family="DM"
-          >
-            {influencer?.name}
-          </Text>
         </View>
         <View className="flex-1 px-6 pb-6">
           <Text

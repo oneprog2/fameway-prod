@@ -1,18 +1,17 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import {
   HomeScreen,
-  LoginScreen,
   ProfileScreen,
   SearchScreen,
   WishlistScreen,
+  CartScreen,
 } from "@screens";
-import { createBottomSheetNavigator } from "@th3rdwave/react-navigation-bottom-sheet";
 import { CartTabButton, CustomIcon, TabBarIcon } from "@components";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 const CustomerStack = createBottomTabNavigator();
-const BottomSheet = createBottomSheetNavigator();
 
-export const CustomerStackTabs = () => {
+export const CustomerStackNavigator = () => {
   return (
     <CustomerStack.Navigator
       screenOptions={{
@@ -50,16 +49,14 @@ export const CustomerStackTabs = () => {
         name="Cart"
         component={HomeScreen}
         listeners={{
-          tabPress: (e) => {
-            e.preventDefault();
-          },
+          tabPress: (e) => {},
         }}
         options={{
           tabBarIcon: ({ focused }) => (
             <CustomIcon
               name="shopping-bag-converted"
               color="#4f4f4f"
-              size="30"
+              size={30}
             />
           ),
           tabBarButton: (props) => <CartTabButton {...props} />,
@@ -92,26 +89,5 @@ export const CustomerStackTabs = () => {
         component={ProfileScreen}
       />
     </CustomerStack.Navigator>
-  );
-};
-
-export const CustomerStackNavigator = () => {
-  return (
-    <BottomSheet.Navigator>
-      <BottomSheet.Screen
-        name="CustomerStackTabs"
-        component={CustomerStackTabs}
-      />
-
-      <BottomSheet.Screen
-        name="firstSheet"
-        component={LoginScreen}
-        options={{
-          snapPoints: [200, 400],
-          bottomInset: 100,
-          detached: true,
-        }}
-      />
-    </BottomSheet.Navigator>
   );
 };
