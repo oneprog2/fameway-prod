@@ -6,3 +6,4 @@ export * from "./Auth";
 export * from "./Search";
 export * from "./Wishlist";
 export * from "./Cart";
+export * from "./Store";

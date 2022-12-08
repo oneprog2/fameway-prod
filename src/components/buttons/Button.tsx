@@ -9,8 +9,6 @@ import Animated, {
   withTiming,
 } from "react-native-reanimated";
 
-const PRESSED_SCALE = 0.9;
-
 const buttonClassName = variants("flex flex-row items-center justify-center", {
   variants: {
     role: {
@@ -138,6 +136,7 @@ export type ButtonProps = VariantProps<typeof buttonClassName> & {
   disabled?: boolean;
   onPress?: PressableProps["onPress"];
   children?: React.ReactNode;
+  animScale: number;
 };
 
 export function Button(props: ButtonProps) {
@@ -151,8 +150,10 @@ export function Button(props: ButtonProps) {
     onPress = () => {},
     children,
     shadow,
+    animScale = 0.95,
     ...rest
   } = props;
+
   const scale = useSharedValue(1);
 
   const iconOnly = icon !== undefined && label === undefined;
@@ -168,7 +169,7 @@ export function Button(props: ButtonProps) {
       onPress={onPress}
       onTouchStart={() => {
         if (!disabled) {
-          scale.value = withTiming(PRESSED_SCALE, timingConfig);
+          scale.value = withTiming(animScale, timingConfig);
         }
       }}
       onTouchEnd={() => {

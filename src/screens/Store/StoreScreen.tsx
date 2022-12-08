@@ -161,8 +161,7 @@ const SectionName = ({ name }: { name: string }) => {
   );
 };
 
-export const HomeScreen = ({ navigation }) => {
-  const [first, setfirst] = useState("test");
+export const StoreScreen = ({ navigation }) => {
   return (
     <PageContainer
       onPress={() => navigation.navigate("Search")}
