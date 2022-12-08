@@ -8,10 +8,11 @@ import {
 } from "@components";
 import { useState } from "react";
 import { View } from "react-native";
+import { ScrollView } from "react-native-gesture-handler";
 
 function SellerHeader() {
   return (
-    <View className="w-full flex-row">
+    <View className="w-full flex-row border-t-[1px]  border-[#E6E6E6] pt-2">
       <View className="flex-1">
         <Avatar
           size={34}
@@ -59,13 +60,16 @@ function ArticleItem() {
 
         <View className="flex-row items-center justify-end">
           <View className="flex-1 items-end pr-2">
-            <Button
-              roundness="full"
-              role="grey"
-              icon={<CustomIcon size={18} name="trash" />}
-            ></Button>
+            <View className="w-8 h-8">
+              <Button
+                size={"full"}
+                roundness="full"
+                role="grey"
+                icon={<CustomIcon size={18} name="trash" />}
+              ></Button>
+            </View>
           </View>
-          <View className="flex-1">
+          <View className="w-[85px]">
             <QuantitySelector
               quantity={quantity}
               onDecrement={() => quantity > 0 && setQuantity(quantity - 1)}
@@ -80,7 +84,7 @@ function ArticleItem() {
 
 export function TotalAmount() {
   return (
-    <View className="flex-row w-full absolute bottom-1">
+    <View className="flex-row w-full absolute bottom-2 bg-white pt-2">
       <View className="flex-1">
         <View className="flex-1">
           <Text family="DM" position="left" weight="bold" color="neutral-muted">
@@ -110,7 +114,7 @@ export function TotalAmount() {
 
 export function Subtotal() {
   return (
-    <View className="flex-row w-full border-b-[1px] border-[#E6E6E6] p-1">
+    <View className="flex-row w-full border-b-[1px] border-[#E6E6E6] p-1 mt-3">
       <View className="flex-1">
         <Text family="DM" position="left" weight="light" color="neutral-muted">
           Sub-total
@@ -128,18 +132,22 @@ export function Subtotal() {
 
 export function CartScreen({ closeCart }: { closeCart?: () => void }) {
   return (
-    <View className="flex-1 m-4 mb-5">
+    <View className="flex-1 m-4 pb-5">
       <View className="flex-row">
-        <View className="flex-1 pl-6 py-5">
-          <Text
-            position="left"
-            weight="bold"
-            family="DM"
-            size="xxl"
-            color="black"
-          >
-            Cart
-          </Text>
+        <View className="flex-1 pl-1 pb-5 pt-2">
+          <View className="flex-row">
+            <CustomIcon size={30} name="shopping-bag-converted"></CustomIcon>
+            <Text
+              className="ml-2"
+              position="left"
+              weight="bold"
+              family="DM"
+              size="xxl"
+              color="black"
+            >
+              Cart
+            </Text>
+          </View>
         </View>
         <View className="align-end p-2">
           <Button
@@ -151,12 +159,37 @@ export function CartScreen({ closeCart }: { closeCart?: () => void }) {
           />
         </View>
       </View>
-      <SellerHeader />
-      <View className="mb-3">
-        <ArticleItem />
-        <Subtotal />
-      </View>
 
+      <ScrollView
+        className="mb-12"
+        showsVerticalScrollIndicator={false}
+        showsHorizontalScrollIndicator={false}
+      >
+        <SellerHeader />
+        <View className="mb-3">
+          <ArticleItem />
+          <ArticleItem />
+          <Subtotal />
+        </View>
+        <SellerHeader />
+        <View className="mb-3">
+          <ArticleItem />
+          <ArticleItem />
+          <Subtotal />
+        </View>
+        <SellerHeader />
+        <View className="mb-3">
+          <ArticleItem />
+          <ArticleItem />
+          <Subtotal />
+        </View>
+        <SellerHeader />
+        <View className="mb-3">
+          <ArticleItem />
+          <ArticleItem />
+          <Subtotal />
+        </View>
+      </ScrollView>
       <TotalAmount />
     </View>
   );

@@ -13,14 +13,15 @@ export const QuantitySelector = ({
   onDecrement,
 }: QuantitySelectorProps) => {
   return (
-    <View className="flex-row bg-[#f0f0f0]">
-      <View className="flex-1">
+    <View className="flex-row bg-[#f0f0f0] rounded-full">
+      <View className="h-8 w-8">
         <Button
           roundness="full"
-          role="empty"
+          role={quantity > 0 ? "white" : "empty"}
           className="p-1"
+          size="full"
           icon={
-            <View className="w-full h-full bg-white rounded-full justify-center items-center">
+            <View className="w-full h-full rounded-full justify-center items-center">
               <CustomIcon size={14} name="minus" />
             </View>
           }
@@ -28,16 +29,17 @@ export const QuantitySelector = ({
         ></Button>
       </View>
 
-      <View className="flex-1 justify-center bg-red-200">
-        <Text size="md" weight="bold" position="center">
+      <View className="flex-1 justify-center">
+        <Text size="sm" weight="bold" position="center">
           {quantity}
         </Text>
       </View>
 
-      <View className="flex-1 bg-red-400">
+      <View className="h-8 w-8">
         <Button
+          size="full"
           roundness="full"
-          role="white"
+          role={quantity < 20 ? "white" : "empty"}
           className="p-1"
           icon={
             <View className="w-full h-full rounded-full justify-center items-center">

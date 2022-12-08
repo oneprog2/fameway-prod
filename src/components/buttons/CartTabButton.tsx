@@ -11,7 +11,7 @@ interface DataProps {
 
 export const CartTabButton: React.FC<DataProps> = ({ children }) => {
   const bottomSheetRef = useRef<BottomSheet>(null);
-  const snapPoints = useMemo(() => [400], []);
+  const snapPoints = useMemo(() => ["90%"], []);
   const [open, setOpen] = useState(false);
 
   const onAddButtonPress = () => {
@@ -49,8 +49,8 @@ export const CartTabButton: React.FC<DataProps> = ({ children }) => {
           style={{
             marginHorizontal: 10,
             shadowColor: "#000000",
-            shadowOffset: { width: 0, height: 3 },
-            shadowOpacity: 0.5,
+            shadowOffset: { width: 0, height: 5 },
+            shadowOpacity: 0.2,
             shadowRadius: 5,
             elevation: 3,
           }}
