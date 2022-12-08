@@ -27,7 +27,7 @@ export const StoreHeader = ({
       </View>
 
       <View className="flex-row h-16">
-        <View className="left-4 -top-10  p-1 w-28 h-28 rounded-full bg-white ">
+        <View className="left-2 -top-10  p-1 w-28 h-28 rounded-full bg-white ">
           <Image
             resizeMode="contain"
             className="h-full w-full rounded-full bg-black"
@@ -35,7 +35,7 @@ export const StoreHeader = ({
           />
         </View>
 
-        <View className="ml-6 pr-1 flex-row flex-1">
+        <View className="ml-4 pr-2 flex-row flex-1">
           <View className="flex-1 justify-center">
             <Text position={"left"} size="xl" weight="bold">
               Amixem
