@@ -157,7 +157,7 @@ export function CartScreen({ closeCart }: { closeCart?: () => void }) {
   return (
     <View className="flex-1 mx-4 mt-4">
       <View className="flex-row">
-        <View className="flex-1 pl-1 pb-5 pt-2">
+        <View className="flex-1 justify-center">
           <View className="flex-row">
             <CustomIcon size={30} name="shopping-bag-converted"></CustomIcon>
             <Text
