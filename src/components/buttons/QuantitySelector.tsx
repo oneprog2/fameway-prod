@@ -17,7 +17,7 @@ export const QuantitySelector = ({
       <View className="h-8 w-8">
         <Button
           roundness="full"
-          role={quantity > 0 ? "white" : "empty"}
+          role={quantity > 1 ? "white" : "empty"}
           className="p-1"
           size="full"
           icon={

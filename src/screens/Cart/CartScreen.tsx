@@ -34,7 +34,7 @@ function SellerHeader({ first }: { first?: boolean }) {
 }
 
 function ArticleItem() {
-  const [quantity, setQuantity] = useState(0);
+  const [quantity, setQuantity] = useState(1);
   const [deleteConfirmation, setDeleteConfirmation] = useState(false);
 
   return (
@@ -90,7 +90,7 @@ function ArticleItem() {
             <View className="w-[85px]">
               <QuantitySelector
                 quantity={quantity}
-                onDecrement={() => quantity > 0 && setQuantity(quantity - 1)}
+                onDecrement={() => quantity > 1 && setQuantity(quantity - 1)}
                 onIncrement={() => quantity < 20 && setQuantity(quantity + 1)}
               />
             </View>
@@ -155,7 +155,7 @@ export function Subtotal({ last }: { last?: boolean }) {
 
 export function CartScreen({ closeCart }: { closeCart?: () => void }) {
   return (
-    <View className="flex-1 mx-4 mt-4 pb-5">
+    <View className="flex-1 mx-4 mt-4">
       <View className="flex-row">
         <View className="flex-1 pl-1 pb-5 pt-2">
           <View className="flex-row">
