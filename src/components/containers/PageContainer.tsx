@@ -61,7 +61,7 @@ export function PageContainer({
                 role="empty"
                 onPress={() => navigation.goBack()}
                 iconOnly
-                icon={
+                startSlot={
                   <CustomIcon name="chevron-left" color="black" size={40} />
                 }
               />
@@ -76,7 +76,7 @@ export function PageContainer({
             </Text>
           </View>
           {icon ? (
-            <Button role={"empty"} onPress={onPress} icon={icon} />
+            <Button role={"empty"} onPress={onPress} startSlot={icon} />
           ) : null}
         </Animated.View>
       </View>

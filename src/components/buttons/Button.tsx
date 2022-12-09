@@ -16,6 +16,7 @@ const buttonClassName = variants("flex flex-row items-center justify-center", {
       primary: "",
       critical: "",
       grey: "bg-[#f0f0f0]",
+      outline: "border border-neutral-10",
       white: "bg-[#FFFFFF]",
       fameway: "bg-fameway",
     },
@@ -52,7 +53,7 @@ const buttonClassName = variants("flex flex-row items-center justify-center", {
     {
       role: "normal",
       disabled: true,
-      className: "bg-transparent border-neutral-a-6",
+      className: "bg-neutral-11 border-neutral-a-6",
     },
     {
       role: "primary",
@@ -108,7 +109,7 @@ const buttonLabelClassName = variants("font-boldDM", {
     {
       role: "normal",
       disabled: true,
-      className: "text-neutral-6",
+      className: "text-white",
     },
     {
       role: "primary",
@@ -132,23 +133,23 @@ const timingConfig = {
 
 export type ButtonProps = VariantProps<typeof buttonClassName> & {
   label?: string;
-  icon?: React.ReactNode;
+  startSlot?: React.ReactNode;
+  endSlot?: React.ReactNode;
   disabled?: boolean;
   onPress?: PressableProps["onPress"];
-  children?: React.ReactNode;
   animScale: number;
 };
 
 export function Button(props: ButtonProps) {
   const {
     label,
-    icon,
+    startSlot,
+    endSlot,
     role = "normal",
     size = "md",
     roundness = "normal",
     disabled = false,
     onPress = () => {},
-    children,
     shadow,
     animScale = 0.95,
     ...rest
@@ -156,7 +157,8 @@ export function Button(props: ButtonProps) {
 
   const scale = useSharedValue(1);
 
-  const iconOnly = icon !== undefined && label === undefined;
+  const iconOnly =
+    (startSlot !== undefined || endSlot !== undefined) && label === undefined;
 
   const buttonStyle = useAnimatedStyle(() => ({
     transform: [{ scale: scale.value }],
@@ -187,12 +189,13 @@ export function Button(props: ButtonProps) {
         })}
         style={buttonStyle}
       >
-        {icon}
+        {startSlot}
         {label ? (
           <Text className={buttonLabelClassName({ role, size, disabled })}>
             {label}
           </Text>
         ) : null}
+        {endSlot}
       </Animated.View>
     </Pressable>
   );

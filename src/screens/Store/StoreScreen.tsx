@@ -154,7 +154,7 @@ const SectionName = ({ name }: { name: string }) => {
           iconOnly
           role="empty"
           size="full"
-          icon={<Text size="sm">Show all</Text>}
+          startSlot={<Text size="sm">Show all</Text>}
           backgroundColor="transparent"
         ></Button>
       </View>

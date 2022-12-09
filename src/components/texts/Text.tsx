@@ -23,6 +23,8 @@ const textClassName = variants("", {
       xl: "text-xl",
       xxl: "text-2xl",
       xxxl: "text-3xl",
+      "4xl": "text-4xl",
+      "5xl": "text-5xl",
     },
     weight: {
       bold: "font-bold",

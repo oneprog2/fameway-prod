@@ -48,7 +48,7 @@ export const StoreHeader = ({
             <Button
               roundness={"full"}
               label="Follow"
-              icon={<CustomIcon color="white" size={20} name={"plus2"} />}
+              startSlot={<CustomIcon color="white" size={20} name={"plus2"} />}
             />
           </View>
         </View>

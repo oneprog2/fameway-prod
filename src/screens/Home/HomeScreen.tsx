@@ -153,7 +153,7 @@ const SectionName = ({ name }: { name: string }) => {
           iconOnly
           role="empty"
           size="full"
-          icon={<Text size="sm">Show all</Text>}
+          startSlot={<Text size="sm">Show all</Text>}
           backgroundColor="transparent"
         ></Button>
       </View>
@@ -165,7 +165,7 @@ export const HomeScreen = ({ navigation }) => {
   return (
     <PageContainer
       onPress={() => navigation.navigate("Search")}
-      icon={<CustomIcon name="search" size={30} color="#717171" />}
+      startSlot={<CustomIcon name="search" size={30} color="#717171" />}
       title="Fameway"
     >
       <View className="fixed h-14">

@@ -23,7 +23,7 @@ export const InfluencersCard = ({
           role="empty"
           iconOnly
           animScale={0.97}
-          icon={
+          startSlot={
             <CardContainer
               backgroundColor={backgroundColor}
               padding="none"
@@ -54,7 +54,7 @@ export const InfluencersCard = ({
           size="sm"
           label="Follow"
           role="grey"
-          icon={<CustomIcon size={20} name="plus2" />}
+          startSlot={<CustomIcon size={20} name="plus2" />}
           roundness="full"
         />
       </View>

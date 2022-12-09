@@ -21,7 +21,7 @@ export const AppNavigator = () => {
   const scheme = useColorScheme();
   const { isFirstLaunch, isLoading: onboardingIsLoading } =
     useGetOnboardingStatus();
-  const [logged, setlogged] = useState(true);
+  const [logged, setlogged] = useState(false);
 
   const linking = {
     prefixes: [prefix],
@@ -55,7 +55,9 @@ export const AppNavigator = () => {
         }}
         initialRouteName={"Presentation"}
       >
-        {(() => {
+        <Stack.Screen name="AuthStack" component={AuthStackNavigator} />
+
+        {/* {(() => {
           if (isFirstLaunch && !logged)
             return (
               <>
@@ -86,7 +88,7 @@ export const AppNavigator = () => {
                 <Stack.Screen name="Store" component={StoreScreen} />
               </Stack.Group>
             );
-        })()}
+        })()} */}
       </Stack.Navigator>
     </NavigationContainer>
   );

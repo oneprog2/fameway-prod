@@ -20,7 +20,7 @@ export const QuantitySelector = ({
           role={quantity > 1 ? "white" : "empty"}
           className="p-1"
           size="full"
-          icon={
+          startSlot={
             <View className="w-full h-full rounded-full justify-center items-center">
               <CustomIcon size={14} name="minus" />
             </View>
@@ -41,7 +41,7 @@ export const QuantitySelector = ({
           roundness="full"
           role={quantity < 20 ? "white" : "empty"}
           className="p-1"
-          icon={
+          startSlot={
             <View className="w-full h-full rounded-full justify-center items-center">
               <CustomIcon size={14} name="plus2" />
             </View>

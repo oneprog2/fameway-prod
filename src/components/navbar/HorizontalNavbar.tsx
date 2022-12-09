@@ -75,7 +75,7 @@ export const HorizontalNavbar: React.FC<DataProps & ContextProps> = (props) => {
       horizontal
       data={DATA}
       renderItem={(item) => (
-        <IconButton label={item.item.label} icon={item.item.icon} />
+        <IconButton label={item.item.label} startSlot={item.item.icon} />
       )}
       style={styles.containerStyle}
     />

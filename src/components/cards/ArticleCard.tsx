@@ -48,7 +48,7 @@ export const ArticleCard = ({
               role="white"
               shadow
               className="absolute top-2 right-2"
-              icon={<CustomIcon name="heart" size={25} color="#323232" />}
+              startSlot={<CustomIcon name="heart" size={25} color="#323232" />}
             />
           ) : null}
         </CardContainer>
