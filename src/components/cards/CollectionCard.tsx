@@ -65,20 +65,23 @@ export const CollectionCard = ({
           </Text>
         </View>
 
-        <View className="flex-row h-52 w-full mb-10 items-center px-2">
+        <View className="flex-row h-44 w-full mb-10 items-center px-2">
           {articles?.map((article) => (
             <View className="flex-1 px-1">
               <CardContainer light="off" backgroundColor="white">
-                <ArticleCard
-                  wishlistButton={false}
-                  size={"flex"}
-                  position="center"
-                  backgroundColor="#f4f4f4"
-                  key={article.id}
-                  name={article.name}
-                  price={article.price + "€"}
-                  image={article.image}
-                />
+                <View className="h-full w-full">
+                  <ArticleCard
+                    wishlistButton={false}
+                    size={"flex"}
+                    position="center"
+                    backgroundColor="#f4f4f4"
+                    key={article.id}
+                    collectionCard={true}
+                    name={article.name}
+                    price={article.price + "€"}
+                    image={article.image}
+                  />
+                </View>
               </CardContainer>
             </View>
           ))}

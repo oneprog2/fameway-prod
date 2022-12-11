@@ -13,6 +13,7 @@ export type ArticleCardProps = {
   size?: "sm" | "md" | "flex";
   wishlistButton?: boolean;
   horizontal?: boolean;
+  collectionCard?: boolean;
 };
 
 export const ArticleCard = ({
@@ -23,13 +24,14 @@ export const ArticleCard = ({
   size,
   wishlistButton,
   tag,
+  collectionCard,
   onPress,
   horizontal,
   position = "left",
   backgroundColor = "#f4f4f4",
 }: ArticleCardProps) => {
   return (
-    <View className="w-full h-full flex-1 items-center">
+    <View className="w-full h-full flex-1 items-center ">
       <View
         className={
           size === "flex"
@@ -81,7 +83,7 @@ export const ArticleCard = ({
       <View
         className={
           size === "flex"
-            ? "flex-1 w-full h-full pt-1"
+            ? "flex-1 w-full h-full justify-center"
             : horizontal
             ? "w-44 px-4 pt-1"
             : "w-full px-5 pt-1 pb-4"
@@ -89,7 +91,7 @@ export const ArticleCard = ({
       >
         {name ? (
           <Text
-            numberOfLines={1}
+            numberOfLines={collectionCard ? 2 : 1}
             weight="bold"
             size={description ? "md" : "xs"}
             family="DM"
@@ -100,7 +102,7 @@ export const ArticleCard = ({
         ) : null}
         {description ? (
           <Text
-            numberOfLines={1}
+            numberOfLines={collectionCard ? 0 : 1}
             className="pt-1"
             weight="regular"
             family="DM"
