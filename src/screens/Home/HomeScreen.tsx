@@ -1,17 +1,16 @@
 import {
-  ArticleCard,
   Button,
   CustomIcon,
   CollectionCard,
   HorizontalNavbar,
   NoveltyCard,
   PageContainer,
-  Text,
+  SectionName,
   CreateAccountCard,
+  SellersList,
 } from "@components";
-import { useState } from "react";
-import { Image, SafeAreaView, View } from "react-native";
-import { CardContainer, InfluencersCard } from "@components";
+import { View } from "react-native";
+import { ArticlesList, InfluencersCard } from "@components";
 import { ScrollView } from "react-native-gesture-handler";
 import { FlashList } from "@shopify/flash-list";
 
@@ -140,27 +139,6 @@ const DATA = {
   },
 };
 
-const SectionName = ({ name }: { name: string }) => {
-  return (
-    <View className="flex-1 my-6 flex-row items-center justify-center">
-      <View className="justify-center  items-start h-full">
-        <Text size="xxl" weight="bold">
-          {name}
-        </Text>
-      </View>
-      <View className="flex-1 items-end">
-        <Button
-          iconOnly
-          role="empty"
-          size="full"
-          startSlot={<Text size="sm">Show all</Text>}
-          backgroundColor="transparent"
-        ></Button>
-      </View>
-    </View>
-  );
-};
-
 export const HomeScreen = ({ navigation }) => {
   return (
     <PageContainer
@@ -171,7 +149,11 @@ export const HomeScreen = ({ navigation }) => {
       <View className="fixed h-14">
         <HorizontalNavbar />
       </View>
-      <ScrollView className={"flex-1"}>
+      <ScrollView
+        showsHorizontalScrollIndicator={false}
+        showsVerticalScrollIndicator={false}
+        className={"flex-1"}
+      >
         <View className={"p-3"}>
           <NoveltyCard
             title={DATA.title}
@@ -182,50 +164,13 @@ export const HomeScreen = ({ navigation }) => {
           <SectionName name="New creators" />
         </View>
 
-        <FlashList
-          estimatedItemSize={200}
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          showsVerticalScrollIndicator={false}
-          ListFooterComponent={() => <View className="pl-4" />}
-          data={DATA.influencers}
-          renderItem={({ item }) => (
-            <View className="pl-4">
-              <InfluencersCard
-                onPress={() => navigation.navigate("Store", { item: item })}
-                backgroundColor="#f4f4f4"
-                key={item.id}
-                name={item.name}
-                image={item.image}
-              />
-            </View>
-          )}
-        />
+        <SellersList sellers={DATA.influencers} />
 
         <View className={"p-3 flex-1"}>
           <SectionName name="New items" />
         </View>
 
-        <FlashList
-          horizontal
-          estimatedItemSize={200}
-          showsHorizontalScrollIndicator={false}
-          showsVerticalScrollIndicator={false}
-          data={DATA.articles}
-          ListFooterComponent={() => <View className="pl-4" />}
-          renderItem={({ item }) => (
-            <View className="pl-4 flex-1">
-              <ArticleCard
-                backgroundColor="#f4f4f4"
-                key={item.id}
-                name={item.name}
-                description={item.description}
-                price={item.price + "€"}
-                image={item.image}
-              />
-            </View>
-          )}
-        />
+        <ArticlesList horizontal articles={DATA.articles} />
 
         <View className={"flex-1 p-4 pt-10"}>
           <CollectionCard
@@ -241,26 +186,7 @@ export const HomeScreen = ({ navigation }) => {
           <SectionName name="Trendy items" />
         </View>
 
-        <FlashList
-          horizontal
-          estimatedItemSize={200}
-          showsHorizontalScrollIndicator={false}
-          showsVerticalScrollIndicator={false}
-          data={DATA.articles}
-          ListFooterComponent={() => <View className="pl-4" />}
-          renderItem={({ item }) => (
-            <View className="pl-4 flex-1">
-              <ArticleCard
-                backgroundColor="#f4f4f4"
-                key={item.id}
-                name={item.name}
-                description={item.description}
-                price={item.price + "€"}
-                image={item.image}
-              />
-            </View>
-          )}
-        />
+        <ArticlesList articles={DATA.articles} />
 
         <View className={"flex-1 p-4 pt-10"}>
           <CollectionCard
@@ -271,7 +197,6 @@ export const HomeScreen = ({ navigation }) => {
             articles={DATA.collection2?.articles}
             influencer={DATA.collection2?.influencer}
           />
-          <Text></Text>
         </View>
 
         <View className="p-3 flex-1 pb-10">

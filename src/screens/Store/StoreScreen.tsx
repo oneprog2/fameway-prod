@@ -1,51 +1,25 @@
 import {
-  ArticleCard,
   Button,
-  CustomIcon,
   CollectionCard,
-  HorizontalNavbar,
-  NoveltyCard,
   PageContainer,
   Text,
   CreateAccountCard,
   StoreHeader,
 } from "@components";
-import { useState } from "react";
-import { Image, SafeAreaView, View } from "react-native";
-import { CardContainer, InfluencersCard } from "@components";
+import { StyleSheet, View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { FlashList } from "@shopify/flash-list";
+import ScrollableTabView from "react-native-scrollable-tab-view";
+import TabBar from "react-native-underline-tabbar";
 
 const DATA = {
-  id: "1",
-  title: "Novelty is a card with a title and a button",
-  buttonLabel: "Click to see",
-  images: [
-    require("@assets/images/test1.jpg"),
-    require("@assets/images/test2.jpg"),
-    require("@assets/images/test3.jpg"),
-  ],
-  influencers: [
-    {
-      id: "1",
-      name: "Amixem",
-      image: require("@assets/images/influencer.png"),
-    },
-    {
-      id: "2",
-      name: "Pokimane",
-      image: require("@assets/images/influencer1.png"),
-    },
-    {
-      id: "3",
-      name: "Squeezie Gaming",
-      image: require("@assets/images/influencer2.png"),
-    },
-    {
-      id: "4",
-      name: "Illiasse RIFKI",
-      image: require("@assets/images/influencer3.png"),
-    },
+  categories: [
+    "All",
+    "Tee shirt",
+    "Album",
+    "Visio",
+    "Image de référence",
+    "NFT",
   ],
   articles: [
     {
@@ -141,98 +115,45 @@ const DATA = {
   },
 };
 
-const SectionName = ({ name }: { name: string }) => {
-  return (
-    <View className="flex-1 my-6 flex-row items-center justify-center">
-      <View className="justify-center  items-start h-full">
-        <Text size="xxl" weight="bold">
-          {name}
-        </Text>
-      </View>
-      <View className="flex-1 items-end">
-        <Button
-          iconOnly
-          role="empty"
-          size="full"
-          startSlot={<Text size="sm">Show all</Text>}
-          backgroundColor="transparent"
-        ></Button>
-      </View>
+const Page = ({ label }) => (
+  <View>
+    <View className={"flex-1 p-4 pt-10"}>
+      <CollectionCard
+        buttonRole="white"
+        backgroundColor="#000000"
+        name={DATA.collection?.name}
+        description={DATA.collection?.description}
+        articles={DATA.collection?.articles}
+        influencer={DATA.collection?.influencer}
+      />
     </View>
-  );
-};
+
+    <View className="p-3 flex-1 pb-10">
+      <CreateAccountCard
+        title="Create your account today"
+        subtitle="Never miss exclusive drops again"
+        backgroundColor="#f5f5f5"
+      />
+    </View>
+  </View>
+);
 
 export const StoreScreen = ({ route, navigation }) => {
   return (
     <PageContainer goBack title={"Amixem"}>
       <ScrollView className={"flex-1"}>
-        <View className="p-4 h-80 flex-1">
+        <View className="px-4 pb-4 pt-4 -mt-2 h-80 flex-1">
           <StoreHeader />
         </View>
 
-        <FlashList
-          numColumns={2}
-          estimatedItemSize={200}
-          showsHorizontalScrollIndicator={false}
-          showsVerticalScrollIndicator={false}
-          data={DATA.articles}
-          ListFooterComponent={() => <View className="pl-4" />}
-          renderItem={({ item }) => (
-            <View className="p-4 flex-1">
-              <ArticleCard
-                backgroundColor="#f4f4f4"
-                key={item.id}
-                name={item.name}
-                description={item.description}
-                price={item.price + "€"}
-                image={item.image}
-              />
-            </View>
-          )}
-        />
-
-        <View className={"px-3 flex-1"}>
-          <SectionName name="Trendy items" />
-        </View>
-
-        <FlashList
-          horizontal
-          estimatedItemSize={200}
-          showsHorizontalScrollIndicator={false}
-          showsVerticalScrollIndicator={false}
-          data={DATA.articles}
-          ListFooterComponent={() => <View className="pl-4" />}
-          renderItem={({ item }) => (
-            <View className="pl-4 flex-1">
-              <ArticleCard
-                backgroundColor="#f4f4f4"
-                key={item.id}
-                name={item.name}
-                description={item.description}
-                price={item.price + "€"}
-                image={item.image}
-              />
-            </View>
-          )}
-        />
-
-        <View className={"flex-1 p-4 pt-10"}>
-          <CollectionCard
-            backgroundColor="#000000"
-            name={DATA.collection?.name}
-            description={DATA.collection?.description}
-            articles={DATA.collection?.articles}
-            influencer={DATA.collection?.influencer}
-          />
-        </View>
-
-        <View className="p-3 flex-1 pb-10">
-          <CreateAccountCard
-            title="Create your account today"
-            subtitle="Never miss exclusive drops again"
-            backgroundColor="#f5f5f5"
-          />
-        </View>
+        <ScrollableTabView
+          tabBarActiveTextColor="#000000"
+          renderTabBar={() => <TabBar underlineColor="#000000" />}
+        >
+          {DATA.categories.map((category, index) => (
+            <Page tabLabel={{ label: category }} key={index} />
+          ))}
+        </ScrollableTabView>
       </ScrollView>
     </PageContainer>
   );

@@ -73,10 +73,11 @@ export function Text(props: TextProps) {
     position = "center",
     weight = "medium",
     family = "Oblivian",
+    ...rest
   } = props;
   return (
     <TextBase
-      {...props}
+      {...rest}
       className={textClassName({
         color,
         size,

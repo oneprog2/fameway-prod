@@ -11,6 +11,7 @@ export type ArticleCardProps = {
   position?: "left" | "center" | "right";
   size?: "sm" | "md" | "flex";
   wishlistButton?: boolean;
+  horizontal?: boolean;
 };
 
 export const ArticleCard = ({
@@ -21,12 +22,21 @@ export const ArticleCard = ({
   size,
   wishlistButton,
   onPress,
+  horizontal,
   position = "left",
   backgroundColor = "#f4f4f4",
 }: ArticleCardProps) => {
   return (
-    <View className="w-full h-full flex-1">
-      <View className={size === "flex" ? "flex-1 w-full h-full" : "h-48 w-40"}>
+    <View className="w-full h-full flex-1 items-center">
+      <View
+        className={
+          size === "flex"
+            ? "flex-1 w-full h-full"
+            : horizontal
+            ? "h-48 w-44 pl-4"
+            : "h-48 w-full px-4"
+        }
+      >
         <CardContainer
           backgroundColor={backgroundColor}
           padding="none"
@@ -54,19 +64,29 @@ export const ArticleCard = ({
         </CardContainer>
       </View>
 
-      <View className="pt-1">
+      <View
+        className={
+          size === "flex"
+            ? "flex-1 w-full h-full pt-1"
+            : horizontal
+            ? "w-44 px-4 pt-1"
+            : "w-full px-5 pt-1 pb-4"
+        }
+      >
         {name ? (
           <Text
+            numberOfLines={1}
             weight="bold"
             size={description ? "md" : "xs"}
             family="DM"
             position={position}
           >
-            {name}®
+            {name}
           </Text>
         ) : null}
         {description ? (
           <Text
+            numberOfLines={1}
             className="pt-1"
             weight="regular"
             family="DM"

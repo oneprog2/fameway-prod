@@ -8,7 +8,7 @@ export type AvatarProps = {
     image?: any;
   };
   textColor?: string;
-  size: number;
+  size?: number;
 };
 
 export const Avatar = ({ influencer, textColor, size = 44 }: AvatarProps) => {
