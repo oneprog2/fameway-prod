@@ -55,8 +55,13 @@ export const AppNavigator = () => {
         }}
         initialRouteName={"Presentation"}
       >
-        <Stack.Screen name="AuthStack" component={AuthStackNavigator} />
-
+        <Stack.Group>
+          <Stack.Screen
+            name="CustomerStack"
+            component={CustomerStackNavigator}
+          />
+          <Stack.Screen name="Store" component={StoreScreen} />
+        </Stack.Group>
         {/* {(() => {
           if (isFirstLaunch && !logged)
             return (
