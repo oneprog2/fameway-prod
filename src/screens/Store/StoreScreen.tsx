@@ -6,12 +6,11 @@ import {
   CreateAccountCard,
   StoreHeader,
   ArticlesList,
+  TopTabBar,
 } from "@components";
 import { StyleSheet, View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { FlashList } from "@shopify/flash-list";
-import ScrollableTabView from "react-native-scrollable-tab-view";
-import TabBar from "react-native-underline-tabbar";
 
 const DATA = {
   categories: ["Tee shirt", "Album", "Visio", "Image de référence", "NFT"],
@@ -110,14 +109,6 @@ const DATA = {
   },
 };
 
-const ArticlePage = ({ articles }) => (
-  <View>
-    <View className="pt-6">
-      <ArticlesList disabled articles={articles} />
-    </View>
-  </View>
-);
-
 const MainPage = ({ label }) => (
   <View>
     <View className="pt-6">
@@ -144,6 +135,14 @@ const MainPage = ({ label }) => (
   </View>
 );
 
+const ArticlePage = ({ articles }) => (
+  <View>
+    <View className="pt-6">
+      <ArticlesList disabled articles={articles} />
+    </View>
+  </View>
+);
+
 export const StoreScreen = ({ route, navigation }) => {
   return (
     <PageContainer goBack title={"Amixem"}>
@@ -152,22 +151,7 @@ export const StoreScreen = ({ route, navigation }) => {
           <StoreHeader />
         </View>
 
-        <ScrollableTabView
-          tabBarActiveTextColor="#000000"
-          renderTabBar={() => (
-            <TabBar
-              tabBarTextStyle={{
-                fontSize: 16,
-                fontFamily: "DM-Regular",
-              }}
-              tabBarStyle={{
-                borderTopWidth: 0,
-                borderBottomWidth: 0,
-              }}
-              underlineColor="#000000"
-            />
-          )}
-        >
+        <TopTabBar tabQuantity={DATA.categories.length + 1}>
           <MainPage tabLabel={{ label: "All" }} key={"ALL"} />
 
           {DATA.categories.map((category, index) => (
@@ -177,7 +161,7 @@ export const StoreScreen = ({ route, navigation }) => {
               key={index}
             />
           ))}
-        </ScrollableTabView>
+        </TopTabBar>
       </ScrollView>
     </PageContainer>
   );
