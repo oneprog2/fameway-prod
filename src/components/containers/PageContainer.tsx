@@ -1,6 +1,6 @@
 import { Button, CustomIcon, Text, FamewayIcon } from "@components";
 import { useNavigation } from "@react-navigation/native";
-import { Dimensions, SafeAreaView, View } from "react-native";
+import { Dimensions, View } from "react-native";
 import Animated, {
   Extrapolation,
   interpolate,
@@ -8,6 +8,7 @@ import Animated, {
   useAnimatedStyle,
   useSharedValue,
 } from "react-native-reanimated";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const WIDTH = Dimensions.get("window").width;
 
@@ -49,7 +50,7 @@ export function PageContainer({
   });
 
   return (
-    <SafeAreaView className="flex-1 bg-white">
+    <SafeAreaView edges={["right", "top", "left"]} className="flex-1 bg-white">
       <View className="flex-row items-center">
         <Animated.View
           className="flex-1 flex-row items-center justify-between px-3 h-14"

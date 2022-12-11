@@ -27,7 +27,6 @@ export const ArticlesList = ({
       scrollEnabled={!disabled}
       horizontal={horizontal}
       numColumns={horizontal ? 1 : 2}
-      estimatedItemSize={200}
       showsHorizontalScrollIndicator={false}
       showsVerticalScrollIndicator={false}
       data={articles}
