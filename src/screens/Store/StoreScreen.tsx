@@ -110,10 +110,10 @@ const DATA = {
   },
 };
 
-const ArticlePage = ({ label }) => (
-  <View style={{ backgroundColor: "red" }}>
+const ArticlePage = ({ articles }) => (
+  <View>
     <View className="pt-6">
-      <ArticlesList disabled articles={DATA.articles} />
+      <ArticlesList disabled articles={articles} />
     </View>
   </View>
 );
@@ -154,12 +154,28 @@ export const StoreScreen = ({ route, navigation }) => {
 
         <ScrollableTabView
           tabBarActiveTextColor="#000000"
-          renderTabBar={() => <TabBar underlineColor="#000000" />}
+          renderTabBar={() => (
+            <TabBar
+              tabBarTextStyle={{
+                fontSize: 16,
+                fontFamily: "DM-Regular",
+              }}
+              tabBarStyle={{
+                borderTopWidth: 0,
+                borderBottomWidth: 0,
+              }}
+              underlineColor="#000000"
+            />
+          )}
         >
           <MainPage tabLabel={{ label: "All" }} key={"ALL"} />
 
           {DATA.categories.map((category, index) => (
-            <ArticlePage tabLabel={{ label: category }} key={index} />
+            <ArticlePage
+              tabLabel={{ label: category }}
+              articles={DATA.articles}
+              key={index}
+            />
           ))}
         </ScrollableTabView>
       </ScrollView>

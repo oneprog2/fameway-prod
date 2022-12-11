@@ -12,7 +12,6 @@ import {
 import { View } from "react-native";
 import { ArticlesList, InfluencersCard } from "@components";
 import { ScrollView } from "react-native-gesture-handler";
-import { FlashList } from "@shopify/flash-list";
 
 const DATA = {
   id: "1",
