@@ -23,6 +23,8 @@ const textClassName = variants("", {
       xl: "text-xl",
       xxl: "text-2xl",
       xxxl: "text-3xl",
+      "4xl": "text-4xl",
+      "5xl": "text-5xl",
     },
     weight: {
       bold: "font-bold",
@@ -71,10 +73,11 @@ export function Text(props: TextProps) {
     position = "center",
     weight = "medium",
     family = "Oblivian",
+    ...rest
   } = props;
   return (
     <TextBase
-      {...props}
+      {...rest}
       className={textClassName({
         color,
         size,

@@ -72,7 +72,7 @@ function ArticleItem() {
                   size={"full"}
                   roundness="full"
                   role="grey"
-                  icon={<CustomIcon size={18} name="trash" />}
+                  startSlot={<CustomIcon size={18} name="trash" />}
                 ></Button>
               </View>
             ) : (
@@ -82,7 +82,7 @@ function ArticleItem() {
                 roundness="full"
                 label="Supprimer"
                 role="critical"
-                icon={<CustomIcon color="white" size={18} name="trash" />}
+                startSlot={<CustomIcon color="white" size={18} name="trash" />}
               ></Button>
             )}
           </View>
@@ -178,7 +178,7 @@ export function CartScreen({ closeCart }: { closeCart?: () => void }) {
             roundness="full"
             iconOnly
             role="grey"
-            icon={<CustomIcon name="close" size={30} />}
+            startSlot={<CustomIcon name="close" size={30} />}
           />
         </View>
       </View>

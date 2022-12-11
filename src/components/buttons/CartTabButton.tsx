@@ -67,7 +67,7 @@ export const CartTabButton: React.FC<DataProps> = ({ children }) => {
         roundness="full"
         onPress={onAddButtonPress}
         iconOnly
-        icon={
+        startSlot={
           <View
             style={[
               {

@@ -18,6 +18,7 @@ export type CollectionCardProps = {
   onPress?: () => void;
   startingDate?: string;
   backgroundColor?: string;
+  buttonRole?: string;
 };
 
 export const CollectionCard = ({
@@ -28,6 +29,7 @@ export const CollectionCard = ({
   onPress,
   startingDate,
   backgroundColor,
+  buttonRole = "primary",
 }: CollectionCardProps) => {
   return (
     <CardContainer
@@ -82,7 +84,12 @@ export const CollectionCard = ({
           ))}
         </View>
         <View className="pb-8 items-center px-6">
-          <Button roundness="full" size="lg" label="See collection"></Button>
+          <Button
+            role={buttonRole}
+            roundness="full"
+            size="lg"
+            label="See collection"
+          ></Button>
         </View>
       </View>
     </CardContainer>

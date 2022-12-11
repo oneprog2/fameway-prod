@@ -1,7 +1,7 @@
 import * as React from "react";
 import Svg, { Path, Defs, LinearGradient, Stop } from "react-native-svg";
 
-export const FamewayIcon = ({ color = "#FFCF26" }: { color: string }) => (
+export const FamewayIcon = ({ color = "#FFCF26" }: { color?: string }) => (
   <Svg
     preserveAspectRatio="xMinYMin slice"
     fill="none"

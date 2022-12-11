@@ -15,23 +15,32 @@ export const InfluencersCard = ({
   backgroundColor,
 }: InfluencersCardProps) => {
   return (
-    <View className="">
+    <View className="h-fit w-full">
       <View className="h-48 w-40">
-        <CardContainer
-          backgroundColor={backgroundColor}
-          padding="none"
-          role="primary"
-          roundness="normal"
-          size="lg"
-          light="center"
-        >
-          <Image
-            resizeMode="contain"
-            resizeMethod="resize"
-            source={image}
-            className={"h-full w-full"}
-          ></Image>
-        </CardContainer>
+        <Button
+          onPress={onPress}
+          size="full"
+          role="empty"
+          iconOnly
+          animScale={0.97}
+          startSlot={
+            <CardContainer
+              backgroundColor={backgroundColor}
+              padding="none"
+              role="primary"
+              roundness="normal"
+              size="lg"
+              light="center"
+            >
+              <Image
+                resizeMode="contain"
+                resizeMethod="resize"
+                source={image}
+                className={"h-full w-full"}
+              ></Image>
+            </CardContainer>
+          }
+        ></Button>
       </View>
 
       <View className="pt-1">
@@ -45,7 +54,7 @@ export const InfluencersCard = ({
           size="sm"
           label="Follow"
           role="grey"
-          icon={<CustomIcon size={20} name="plus2" />}
+          startSlot={<CustomIcon size={20} name="plus2" />}
           roundness="full"
         />
       </View>

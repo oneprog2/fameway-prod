@@ -4,12 +4,12 @@ import {
   DarkTheme,
   createNavigationContainerRef,
 } from "@react-navigation/native";
-import { HomeScreen, PresentationScreen } from "@screens";
+import { HomeScreen, PresentationScreen, StoreScreen } from "@screens";
 import { useColorScheme } from "react-native";
 import { useGetOnboardingStatus } from "@hooks";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { AuthStackNavigator, CustomerStackNavigator } from "@navigation";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import * as Linking from "expo-linking";
 
 const prefix = Linking.createURL("/");
@@ -21,7 +21,7 @@ export const AppNavigator = () => {
   const scheme = useColorScheme();
   const { isFirstLaunch, isLoading: onboardingIsLoading } =
     useGetOnboardingStatus();
-  const [logged, setlogged] = useState(true);
+  const [logged, setlogged] = useState(false);
 
   const linking = {
     prefixes: [prefix],
@@ -42,15 +42,10 @@ export const AppNavigator = () => {
       },
     },
   };
-  const [routeName, setRouteName] = useState();
 
   return (
     <NavigationContainer
       ref={navigationRef}
-      onStateChange={async () => {
-        const currentRouteName = navigationRef.getCurrentRoute().name;
-        setRouteName(currentRouteName);
-      }}
       theme={scheme === "dark" ? DarkTheme : DefaultTheme}
       linking={linking}
     >
@@ -60,7 +55,14 @@ export const AppNavigator = () => {
         }}
         initialRouteName={"Presentation"}
       >
-        {(() => {
+        <Stack.Group>
+          <Stack.Screen
+            name="CustomerStack"
+            component={CustomerStackNavigator}
+          />
+          <Stack.Screen name="Store" component={StoreScreen} />
+        </Stack.Group>
+        {/* {(() => {
           if (isFirstLaunch && !logged)
             return (
               <>
@@ -88,9 +90,10 @@ export const AppNavigator = () => {
                   name="CustomerStack"
                   component={CustomerStackNavigator}
                 />
+                <Stack.Screen name="Store" component={StoreScreen} />
               </Stack.Group>
             );
-        })()}
+        })()} */}
       </Stack.Navigator>
     </NavigationContainer>
   );

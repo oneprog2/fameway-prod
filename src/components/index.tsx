@@ -7,3 +7,4 @@ export * from "./navbar";
 export * from "./cards";
 export * from "./containers";
 export * from "./images";
+export * from "./lists";
