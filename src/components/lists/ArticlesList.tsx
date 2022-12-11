@@ -8,6 +8,7 @@ type Article = {
   description: string;
   price: string;
   image: any;
+  tag: string;
 };
 
 export type ArticleListProps = {
@@ -33,6 +34,8 @@ export const ArticlesList = ({
       ListFooterComponent={() => <View className={horizontal ? "pl-4" : ""} />}
       renderItem={({ item, index }: { item: Article; index: number }) => (
         <ArticleCard
+          tag={item.tag}
+          wishlistButton
           horizontal={horizontal}
           backgroundColor="#f4f4f4"
           key={item.id}

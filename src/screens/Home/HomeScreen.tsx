@@ -47,6 +47,7 @@ const DATA = {
   ],
   articles: [
     {
+      tag: "New",
       id: "1",
       name: "Tee shirt - Lacoste",
       description: "Taille M - Blanc",

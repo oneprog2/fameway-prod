@@ -6,6 +6,7 @@ export type ArticleCardProps = {
   description?: string;
   price?: string;
   image?: any;
+  tag?: string;
   onPress?: () => void;
   backgroundColor?: string;
   position?: "left" | "center" | "right";
@@ -21,6 +22,7 @@ export const ArticleCard = ({
   price,
   size,
   wishlistButton,
+  tag,
   onPress,
   horizontal,
   position = "left",
@@ -51,6 +53,18 @@ export const ArticleCard = ({
             source={image}
             className={"h-full w-full"}
           ></Image>
+
+          {tag ? (
+            <Button
+              size="sm"
+              disabled
+              label={tag}
+              roundness="full"
+              role="white"
+              shadow
+              className="absolute top-2 left-2"
+            />
+          ) : null}
           {wishlistButton ? (
             <Button
               size="sm"

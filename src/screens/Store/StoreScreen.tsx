@@ -88,6 +88,7 @@ const DATA = {
     },
     articles: [
       {
+        tag: "New",
         id: "1",
         name: "Tee shirt - Lacoste",
         price: "40",
