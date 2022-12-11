@@ -85,7 +85,8 @@ export const TopTabBar = ({ children, tabQuantity }: TopTabBarProps) => {
           }}
           tabBarStyle={{
             borderTopWidth: 0,
-            borderBottomWidth: 0,
+            borderBottomWidth: 0.5,
+            borderBottomColor: "#DDDDDD",
           }}
           underlineColor="#000000"
         />
