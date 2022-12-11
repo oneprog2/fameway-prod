@@ -13,18 +13,24 @@ type Article = {
 export type ArticleListProps = {
   articles: Article[];
   horizontal?: boolean;
+  disabled?: boolean;
 };
 
-export const ArticlesList = ({ articles, horizontal }: ArticleListProps) => {
+export const ArticlesList = ({
+  articles,
+  horizontal,
+  disabled,
+}: ArticleListProps) => {
   return (
     <FlashList
+      scrollEnabled={!disabled}
       horizontal={horizontal}
       numColumns={horizontal ? 1 : 2}
       estimatedItemSize={200}
       showsHorizontalScrollIndicator={false}
       showsVerticalScrollIndicator={false}
       data={articles}
-      ListFooterComponent={() => <View className="pl-4" />}
+      ListFooterComponent={() => <View className={horizontal ? "pl-4" : ""} />}
       renderItem={({ item, index }: { item: Article; index: number }) => (
         <ArticleCard
           horizontal={horizontal}

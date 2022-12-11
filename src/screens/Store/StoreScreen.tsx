@@ -5,6 +5,7 @@ import {
   Text,
   CreateAccountCard,
   StoreHeader,
+  ArticlesList,
 } from "@components";
 import { StyleSheet, View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
@@ -13,14 +14,7 @@ import ScrollableTabView from "react-native-scrollable-tab-view";
 import TabBar from "react-native-underline-tabbar";
 
 const DATA = {
-  categories: [
-    "All",
-    "Tee shirt",
-    "Album",
-    "Visio",
-    "Image de référence",
-    "NFT",
-  ],
+  categories: ["Tee shirt", "Album", "Visio", "Image de référence", "NFT"],
   articles: [
     {
       id: "1",
@@ -115,9 +109,20 @@ const DATA = {
   },
 };
 
-const Page = ({ label }) => (
+const ArticlePage = ({ label }) => (
+  <View style={{ backgroundColor: "red" }}>
+    <View className="pt-6">
+      <ArticlesList disabled articles={DATA.articles} />
+    </View>
+  </View>
+);
+
+const MainPage = ({ label }) => (
   <View>
-    <View className={"flex-1 p-4 pt-10"}>
+    <View className="pt-6">
+      <ArticlesList disabled articles={DATA.articles} />
+    </View>
+    <View className={"flex-1 p-4"}>
       <CollectionCard
         buttonRole="white"
         backgroundColor="#000000"
@@ -150,8 +155,10 @@ export const StoreScreen = ({ route, navigation }) => {
           tabBarActiveTextColor="#000000"
           renderTabBar={() => <TabBar underlineColor="#000000" />}
         >
+          <MainPage tabLabel={{ label: "All" }} key={"ALL"} />
+
           {DATA.categories.map((category, index) => (
-            <Page tabLabel={{ label: category }} key={index} />
+            <ArticlePage tabLabel={{ label: category }} key={index} />
           ))}
         </ScrollableTabView>
       </ScrollView>
