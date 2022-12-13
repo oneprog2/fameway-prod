@@ -58,6 +58,7 @@ export const TopTabBar = ({ children, tabQuantity }: TopTabBarProps) => {
 
   return (
     <ScrollableTabView
+      initialPage={1}
       onScroll={(x: number) => _scrollX.setValue(x)}
       tabBarActiveTextColor="#000000"
       renderTabBar={() => (

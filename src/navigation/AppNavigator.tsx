@@ -56,10 +56,10 @@ export const AppNavigator = () => {
         initialRouteName={"Presentation"}
       >
         <Stack.Group>
-          <Stack.Screen
+          {/* <Stack.Screen
             name="CustomerStack"
             component={CustomerStackNavigator}
-          />
+          /> */}
           <Stack.Screen name="Store" component={StoreScreen} />
         </Stack.Group>
         {/* {(() => {

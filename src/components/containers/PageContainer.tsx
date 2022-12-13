@@ -14,6 +14,7 @@ const WIDTH = Dimensions.get("window").width;
 
 export function PageContainer({
   children,
+  disabled,
   icon,
   title,
   goBack = false,
@@ -50,7 +51,11 @@ export function PageContainer({
   });
 
   return (
-    <SafeAreaView edges={["right", "top", "left"]} className="flex-1 bg-white">
+    <SafeAreaView
+      forceInset={{ top: "always" }}
+      edges={["right", "top", "left"]}
+      className="flex-1 bg-white"
+    >
       <View className="flex-row items-center">
         <Animated.View
           className="flex-1 flex-row items-center justify-between px-3 h-14"
@@ -82,6 +87,7 @@ export function PageContainer({
         </Animated.View>
       </View>
       <Animated.ScrollView
+        scrollEnabled={!disabled}
         className="flex-1"
         onScroll={scrollHandler}
         scrollEventThrottle={1}
