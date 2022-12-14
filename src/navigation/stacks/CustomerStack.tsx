@@ -7,7 +7,6 @@ import {
   CartScreen,
 } from "@screens";
 import { CartTabButton, CustomIcon, TabBarIcon } from "@components";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 const CustomerStack = createBottomTabNavigator();
 

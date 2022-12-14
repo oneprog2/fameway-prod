@@ -1,16 +1,12 @@
-import { Button, CustomIcon, Text, FamewayIcon } from "@components";
-import { useNavigation } from "@react-navigation/native";
+import { PageHeader, PageHeaderProps } from "@components";
 import { Dimensions, View } from "react-native";
 import Animated, {
-  Extrapolation,
   interpolate,
   useAnimatedScrollHandler,
   useAnimatedStyle,
   useSharedValue,
 } from "react-native-reanimated";
 import { SafeAreaView } from "react-native-safe-area-context";
-
-const WIDTH = Dimensions.get("window").width;
 
 export function PageContainer({
   children,
@@ -19,68 +15,28 @@ export function PageContainer({
   goBack = false,
   onPress,
   isModal,
-}: any) {
+}: PageHeaderProps & { children: React.ReactNode; isModal?: boolean }) {
   const scrollY = useSharedValue(0);
 
   const scrollHandler = useAnimatedScrollHandler((event) => {
     scrollY.value = event.contentOffset.y;
   });
 
-  const navigation = useNavigation();
-
-  const style = useAnimatedStyle(() => {
-    const scale = interpolate(scrollY.value, [-400, 0], [2, 1], {
-      extrapolateRight: Extrapolation.CLAMP,
-    });
-
-    const translateX = interpolate(scrollY.value, [-400, 0], [WIDTH / 2, 0], {
-      extrapolateRight: Extrapolation.CLAMP,
-    });
-
-    const translateY = interpolate(
-      scrollY.value,
-      [-400, 0],
-      [400 - 56 / 2, 0],
-      {
-        extrapolateRight: Extrapolation.CLAMP,
-      }
-    );
-
-    return { transform: [{ translateY }, { translateX }, { scale }] };
+  const borderStyle = useAnimatedStyle(() => {
+    const opacity = interpolate(scrollY.value, [0, 5], [0, 1]);
+    return { opacity };
   });
 
   return (
     <SafeAreaView edges={["right", "top", "left"]} className="flex-1 bg-white">
-      <View className="flex-row items-center">
-        <Animated.View
-          className="flex-1 flex-row items-center justify-between px-3 h-14"
-          style={style}
-        >
-          <View className="flex-row items-center">
-            {goBack ? (
-              <Button
-                role="empty"
-                onPress={() => navigation.goBack()}
-                iconOnly
-                startSlot={
-                  <CustomIcon name="chevron-left" color="black" size={40} />
-                }
-              />
-            ) : null}
-            {title === "Fameway" ? (
-              <View className={"h-10 w-10"}>
-                <FamewayIcon />
-              </View>
-            ) : null}
-            <Text weight="bold" className="text-2xl">
-              {title}
-            </Text>
-          </View>
-          {icon ? (
-            <Button role={"empty"} onPress={onPress} startSlot={icon} />
-          ) : null}
-        </Animated.View>
-      </View>
+      <PageHeader
+        scrollY={scrollY}
+        icon={icon}
+        title={title}
+        goBack={goBack}
+        onPress={onPress}
+      />
+      <Animated.View className="h-[1px] bg-neutral-12" style={borderStyle} />
       <Animated.ScrollView
         className="flex-1"
         onScroll={scrollHandler}

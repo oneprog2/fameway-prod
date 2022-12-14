@@ -18,7 +18,7 @@ export const StoreHeader = ({
 }: StoreHeaderProps) => {
   return (
     <View className="flex-1 rounded-full">
-      <View className="flex-1">
+      <View pointerEvents="none" className="flex-1">
         <Image
           resizeMode="cover"
           className="h-full w-full rounded-2xl"
@@ -27,7 +27,10 @@ export const StoreHeader = ({
       </View>
 
       <View className="flex-row h-16">
-        <View className="left-2 -top-10  p-1 w-28 h-28 rounded-full bg-white ">
+        <View
+          pointerEvents="none"
+          className="left-2 -top-10  p-1 w-28 h-28 rounded-full bg-white"
+        >
           <Image
             resizeMode="contain"
             className="h-full w-full rounded-full bg-black"
@@ -35,8 +38,8 @@ export const StoreHeader = ({
           />
         </View>
 
-        <View className="ml-4 pr-2 flex-row flex-1">
-          <View className="flex-1 justify-center">
+        <View className="ml-4 pr-2 flex-row flex-1" pointerEvents="box-none">
+          <View className="flex-1 justify-center" pointerEvents="none">
             <Text position={"left"} size="xl" weight="bold">
               Amixem
             </Text>
@@ -44,7 +47,7 @@ export const StoreHeader = ({
               @amixem
             </Text>
           </View>
-          <View className="flex-1  justify-center">
+          <View className="flex-1  justify-center" pointerEvents="box-none">
             <Button
               roundness={"full"}
               label="Follow"
