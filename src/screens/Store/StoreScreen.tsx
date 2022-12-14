@@ -16,7 +16,21 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const DATA = {
-  categories: ["Tee shirt", "Album", "Visio", "Image de référence", "NFT"],
+  categories: [
+    "Tee shirt",
+    "Album",
+    "Visio",
+    "Image de référence",
+    "NFT",
+    "Album2",
+    "Visi2o",
+    "Ima2ge de référence",
+    "NF2T",
+    "Al42bum",
+    "Vi2sio",
+    "Im3age de référence",
+    "NF4T",
+  ],
   articles: [
     {
       id: "1",
@@ -139,11 +153,11 @@ const MainPage = () => (
 );
 
 const ArticlePage = ({ articles }) => (
-  <View>
+  <Tabs.ScrollView>
     <View className="pt-6">
       <ArticlesList disabled articles={articles} />
     </View>
-  </View>
+  </Tabs.ScrollView>
 );
 
 const HEADER_HEIGHT = 250;
@@ -182,7 +196,22 @@ export const StoreScreen = ({ route, navigation }) => {
       {/* <PageHeader className="h-20 w-full bg-white absolute z-30" /> */}
       <Tabs.Container
         allowHeaderOverscroll
-        renderTabBar={(props) => <MaterialTabBar {...props} scrollEnabled />}
+        renderTabBar={(props) => (
+          <MaterialTabBar
+            indicatorStyle={{
+              backgroundColor: "#000000",
+              height: 2,
+              borderRadius: 1000,
+            }}
+            labelStyle={{
+              fontSize: 16,
+              fontFamily: "DM-Regular",
+              textTransform: "capitalize",
+            }}
+            {...props}
+            scrollEnabled
+          />
+        )}
         renderHeader={() => <Header></Header>}
       >
         <Tabs.Tab name={"All"}>
