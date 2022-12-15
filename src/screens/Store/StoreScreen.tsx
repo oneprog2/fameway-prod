@@ -3,19 +3,119 @@ import {
   CreateAccountCard,
   StoreHeader,
   ArticlesList,
-  PageHeader,
   Text,
   CustomIcon,
   Button,
 } from "@components";
-import { StyleSheet, View } from "react-native";
-import {
-  Tabs,
-  MaterialTabBar,
-  useCollapsibleStyle,
-  useCurrentTabScrollY,
-} from "react-native-collapsible-tab-view";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { View } from "react-native";
+import { Tabs, MaterialTabBar } from "react-native-collapsible-tab-view";
+import Animated from "react-native-reanimated";
+
+const MainPage = () => (
+  <Tabs.ScrollView>
+    <View className="pt-6">
+      <ArticlesList disabled articles={DATA.articles} />
+    </View>
+    <View className={"flex-1 p-4"}>
+      <CollectionCard
+        buttonRole="white"
+        backgroundColor="#000000"
+        name={DATA.collection?.name}
+        description={DATA.collection?.description}
+        articles={DATA.collection?.articles}
+        influencer={DATA.collection?.influencer}
+      />
+    </View>
+
+    <View className="p-3 flex-1 pb-10">
+      <CreateAccountCard
+        title="Create your account today"
+        subtitle="Never miss exclusive drops again"
+        backgroundColor="#f5f5f5"
+      />
+    </View>
+  </Tabs.ScrollView>
+);
+
+const ArticlePage = ({ articles }) => (
+  <Tabs.ScrollView>
+    <View className="pt-6">
+      <ArticlesList disabled articles={DATA.articles} />
+    </View>
+  </Tabs.ScrollView>
+);
+
+const Header = () => {
+  return (
+    <Animated.View
+      pointerEvents="box-none"
+      className="px-4 pb-4 pt-2 h-80 flex-1"
+    >
+      <StoreHeader />
+    </Animated.View>
+  );
+};
+
+export const StoreScreen = ({ navigation }) => {
+  navigation.setOptions({
+    headerShown: true,
+    headerShadowVisible: false,
+    headerStyle: {
+      backgroundColor: "white",
+      elevation: 0,
+      shadowOpacity: 0,
+      borderBottomWidth: 0,
+    },
+    headerTitle: () => (
+      <Text size="xxl" weight="bold">
+        Amixem
+      </Text>
+    ),
+    headerLeft: () => (
+      <Button
+        role="empty"
+        onPress={() => navigation.goBack()}
+        iconOnly
+        startSlot={<CustomIcon name="chevron-left" color="black" size={40} />}
+      />
+    ),
+  });
+  return (
+    <Tabs.Container
+      containerStyle={{ backgroundColor: "white" }}
+      allowHeaderOverscroll
+      renderTabBar={(props) => {
+        return (
+          <MaterialTabBar
+            indicatorStyle={{
+              backgroundColor: "#000000",
+              height: 2,
+              borderRadius: 1000,
+            }}
+            labelStyle={{
+              fontSize: 16,
+              fontFamily: "DM-Regular",
+              textTransform: "capitalize",
+            }}
+            {...props}
+            scrollEnabled
+          />
+        );
+      }}
+      renderHeader={() => <Header></Header>}
+    >
+      <Tabs.Tab name={"All"}>
+        <MainPage />
+      </Tabs.Tab>
+
+      {DATA.categories.map((item, index) => (
+        <Tabs.Tab name={item} key={index}>
+          <ArticlePage item={DATA.articles} />
+        </Tabs.Tab>
+      ))}
+    </Tabs.Container>
+  );
+};
 
 const DATA = {
   categories: [
@@ -126,106 +226,4 @@ const DATA = {
       },
     ],
   },
-};
-
-const MainPage = () => (
-  <Tabs.ScrollView>
-    <View className="pt-6">
-      <ArticlesList disabled articles={DATA.articles} />
-    </View>
-    <View className={"flex-1 p-4"}>
-      <CollectionCard
-        buttonRole="white"
-        backgroundColor="#000000"
-        name={DATA.collection?.name}
-        description={DATA.collection?.description}
-        articles={DATA.collection?.articles}
-        influencer={DATA.collection?.influencer}
-      />
-    </View>
-
-    <View className="p-3 flex-1 pb-10">
-      <CreateAccountCard
-        title="Create your account today"
-        subtitle="Never miss exclusive drops again"
-        backgroundColor="#f5f5f5"
-      />
-    </View>
-  </Tabs.ScrollView>
-);
-
-const ArticlePage = ({ articles }) => (
-  <Tabs.ScrollView>
-    <View className="pt-6">
-      <ArticlesList disabled articles={articles} />
-    </View>
-  </Tabs.ScrollView>
-);
-
-const Header = () => {
-  return (
-    <View className="px-4 py-4 h-80 flex-1">
-      <StoreHeader />
-    </View>
-  );
-};
-
-export const StoreScreen = ({ navigation }) => {
-  navigation.setOptions({
-    headerShown: true,
-    headerShadowVisible: false,
-    headerStyle: {
-      backgroundColor: "white",
-      elevation: 0,
-      shadowOpacity: 0,
-      borderBottomWidth: 0,
-    },
-    headerTitle: () => (
-      <Text size="xxl" weight="bold">
-        Amixem
-      </Text>
-    ),
-    headerLeft: () => (
-      <Button
-        role="empty"
-        onPress={() => navigation.goBack()}
-        iconOnly
-        startSlot={<CustomIcon name="chevron-left" color="black" size={40} />}
-      />
-    ),
-  });
-  return (
-    <Tabs.Container
-      containerStyle={{ backgroundColor: "white" }}
-      allowHeaderOverscroll
-      renderTabBar={(props) => {
-        return (
-          <MaterialTabBar
-            indicatorStyle={{
-              backgroundColor: "#000000",
-              height: 2,
-              borderRadius: 1000,
-            }}
-            labelStyle={{
-              fontSize: 18,
-              fontFamily: "DM-Regular",
-              textTransform: "capitalize",
-            }}
-            {...props}
-            scrollEnabled
-          />
-        );
-      }}
-      renderHeader={() => <Header></Header>}
-    >
-      <Tabs.Tab name={"All"}>
-        <MainPage />
-      </Tabs.Tab>
-      {DATA.categories.map((item, index) => (
-        <Tabs.Tab name={item} key={index}>
-          <ArticlePage item={DATA.articles[index]} />
-        </Tabs.Tab>
-      ))}
-    </Tabs.Container>
-  );
 };
