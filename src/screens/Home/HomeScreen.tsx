@@ -174,6 +174,12 @@ export const HomeScreen = ({ navigation }) => {
 
         <View className={"flex-1 p-4 pt-10"}>
           <CollectionCard
+            onPress={() =>
+              navigation.navigate("Store", {
+                collectionID: DATA.collection.id,
+              })
+            }
+            collectionID={DATA.collection?.id}
             backgroundColor="#fb4e7c"
             name={DATA.collection?.name}
             description={DATA.collection?.description}
@@ -191,6 +197,11 @@ export const HomeScreen = ({ navigation }) => {
         <View className={"flex-1 p-4 pt-10"}>
           <CollectionCard
             startingDate="2021-01-01"
+            onPress={() =>
+              navigation.navigate("Store", {
+                collectionID: DATA.collection.id,
+              })
+            }
             backgroundColor="#b655f0"
             name={DATA.collection2?.name}
             description={DATA.collection2?.description}

@@ -6,7 +6,10 @@ import {
   Text,
   CustomIcon,
   Button,
+  CollectionHeader,
 } from "@components";
+import { useRoute } from "@react-navigation/native";
+import clsx from "clsx";
 import { View } from "react-native";
 import { Tabs, MaterialTabBar } from "react-native-collapsible-tab-view";
 import Animated from "react-native-reanimated";
@@ -45,18 +48,24 @@ const ArticlePage = ({ articles }) => (
   </Tabs.ScrollView>
 );
 
-const Header = () => {
+const Header = ({ collectionID }: { collectionID: string }) => {
   return (
     <Animated.View
       pointerEvents="box-none"
-      className="px-4 pb-4 pt-2 h-80 flex-1"
+      className={clsx(
+        "px-4 pb-4 pt-2 flex-1",
+        collectionID ? "h-[400px]" : "h-80"
+      )}
     >
-      <StoreHeader />
+      {collectionID ? <CollectionHeader /> : <StoreHeader />}
     </Animated.View>
   );
 };
 
-export const StoreScreen = ({ navigation }) => {
+export const StoreScreen = ({ navigation }: any) => {
+  let route = useRoute();
+  const { collectionID } = route?.params;
+
   navigation.setOptions({
     headerShown: true,
     headerShadowVisible: false,
@@ -102,13 +111,13 @@ export const StoreScreen = ({ navigation }) => {
           />
         );
       }}
-      renderHeader={() => <Header></Header>}
+      renderHeader={() => <Header collectionID={collectionID} />}
     >
       <Tabs.Tab name={"All"}>
         <MainPage />
       </Tabs.Tab>
 
-      {DATA.categories.map((item, index) => (
+      {DATA.categories.map((item: any, index: number) => (
         <Tabs.Tab name={item} key={index}>
           <ArticlePage item={DATA.articles} />
         </Tabs.Tab>

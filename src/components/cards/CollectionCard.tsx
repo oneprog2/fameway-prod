@@ -1,9 +1,10 @@
 import { CardContainer, ArticleCard, Text, Button, Avatar } from "@components";
-import { Image, View } from "react-native";
+import { View } from "react-native";
 
 export type CollectionCardProps = {
   name?: string;
   description?: string;
+  collectionID?: string;
   articles?: {
     id: string;
     name: string;
@@ -25,6 +26,7 @@ export const CollectionCard = ({
   name,
   articles,
   description,
+  collectionID,
   influencer,
   onPress,
   startingDate,
@@ -88,6 +90,7 @@ export const CollectionCard = ({
         </View>
         <View className="pb-8 items-center px-6">
           <Button
+            onPress={onPress}
             role={buttonRole}
             roundness="full"
             size="lg"

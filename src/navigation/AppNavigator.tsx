@@ -55,45 +55,38 @@ export const AppNavigator = () => {
         }}
         initialRouteName={"Presentation"}
       >
-        <Stack.Group>
-          {/* <Stack.Screen
-            name="CustomerStack"
-            component={CustomerStackNavigator}
-          /> */}
-          <Stack.Screen name="Store" component={StoreScreen} />
-        </Stack.Group>
-        {/* {(() => {
-          if (isFirstLaunch && !logged)
-            return (
-              <>
-                <Stack.Screen
-                  name="Presentation"
-                  component={PresentationScreen}
-                />
-                <Stack.Screen name="AuthStack" component={AuthStackNavigator} />
-              </>
-            );
-          else if (!isFirstLaunch && !logged)
-            return (
-              <>
-                <Stack.Screen
-                  name="Login"
-                  component={HomeScreen}
-                  options={{ headerShown: false }}
-                />
-              </>
-            );
-          else
-            return (
-              <Stack.Group>
-                <Stack.Screen
-                  name="CustomerStack"
-                  component={CustomerStackNavigator}
-                />
-                <Stack.Screen name="Store" component={StoreScreen} />
-              </Stack.Group>
-            );
-        })()} */}
+        {(() => {
+          // if (isFirstLaunch && !logged)
+          //   return (
+          //     <>
+          //       <Stack.Screen
+          //         name="Presentation"
+          //         component={PresentationScreen}
+          //       />
+          //       <Stack.Screen name="AuthStack" component={AuthStackNavigator} />
+          //     </>
+          //   );
+          // else if (!isFirstLaunch && !logged)
+          //   return (
+          //     <>
+          //       <Stack.Screen
+          //         name="Login"
+          //         component={HomeScreen}
+          //         options={{ headerShown: false }}
+          //       />
+          //     </>
+          //   );
+          // else
+          return (
+            <Stack.Group>
+              <Stack.Screen
+                name="CustomerStack"
+                component={CustomerStackNavigator}
+              />
+              <Stack.Screen name="Store" component={StoreScreen} />
+            </Stack.Group>
+          );
+        })()}
       </Stack.Navigator>
     </NavigationContainer>
   );
