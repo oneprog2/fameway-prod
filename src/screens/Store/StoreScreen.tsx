@@ -1,18 +1,20 @@
 import {
   CollectionCard,
-  PageContainer,
   CreateAccountCard,
   StoreHeader,
   ArticlesList,
   PageHeader,
+  Text,
+  CustomIcon,
+  Button,
 } from "@components";
 import { StyleSheet, View } from "react-native";
-import { Tabs, MaterialTabBar } from "react-native-collapsible-tab-view";
-import { useCallback } from "react";
 import {
-  useAnimatedScrollHandler,
-  useSharedValue,
-} from "react-native-reanimated";
+  Tabs,
+  MaterialTabBar,
+  useCollapsibleStyle,
+  useCurrentTabScrollY,
+} from "react-native-collapsible-tab-view";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const DATA = {
@@ -160,43 +162,44 @@ const ArticlePage = ({ articles }) => (
   </Tabs.ScrollView>
 );
 
-const HEADER_HEIGHT = 250;
-
-// const DATA = [0, 1, 2, 3, 4];
-const identity = (v: unknown): string => v + "";
-
 const Header = () => {
-  const scrollY = { value: 0 };
-
   return (
-    <SafeAreaView>
-      <PageHeader title={"Amixem"} goBack scrollY={scrollY} className="z-30" />
-      <View className="px-4 pb-4 pt-4 -mt-2 h-80 flex-1">
-        <StoreHeader />
-      </View>
-    </SafeAreaView>
+    <View className="px-4 py-4 h-80 flex-1">
+      <StoreHeader />
+    </View>
   );
 };
 
-export const StoreScreen = ({ route, navigation }) => {
-  const renderItem: ListRenderItem<number> = useCallback(({ index }) => {
-    return (
-      <View style={[styles.box, index % 2 === 0 ? styles.boxB : styles.boxA]} />
-    );
-  }, []);
-
-  // const scrollY = useSharedValue(0);
-
-  // const scrollHandler = useAnimatedScrollHandler((event) => {
-  //   scrollY.value = event.contentOffset.y;
-  // });
-
+export const StoreScreen = ({ navigation }) => {
+  navigation.setOptions({
+    headerShown: true,
+    headerShadowVisible: false,
+    headerStyle: {
+      backgroundColor: "white",
+      elevation: 0,
+      shadowOpacity: 0,
+      borderBottomWidth: 0,
+    },
+    headerTitle: () => (
+      <Text size="xxl" weight="bold">
+        Amixem
+      </Text>
+    ),
+    headerLeft: () => (
+      <Button
+        role="empty"
+        onPress={() => navigation.goBack()}
+        iconOnly
+        startSlot={<CustomIcon name="chevron-left" color="black" size={40} />}
+      />
+    ),
+  });
   return (
-    <>
-      {/* <PageHeader className="h-20 w-full bg-white absolute z-30" /> */}
-      <Tabs.Container
-        allowHeaderOverscroll
-        renderTabBar={(props) => (
+    <Tabs.Container
+      containerStyle={{ backgroundColor: "white" }}
+      allowHeaderOverscroll
+      renderTabBar={(props) => {
+        return (
           <MaterialTabBar
             indicatorStyle={{
               backgroundColor: "#000000",
@@ -204,43 +207,25 @@ export const StoreScreen = ({ route, navigation }) => {
               borderRadius: 1000,
             }}
             labelStyle={{
-              fontSize: 16,
+              fontSize: 18,
               fontFamily: "DM-Regular",
               textTransform: "capitalize",
             }}
             {...props}
             scrollEnabled
           />
-        )}
-        renderHeader={() => <Header></Header>}
-      >
-        <Tabs.Tab name={"All"}>
-          <MainPage />
+        );
+      }}
+      renderHeader={() => <Header></Header>}
+    >
+      <Tabs.Tab name={"All"}>
+        <MainPage />
+      </Tabs.Tab>
+      {DATA.categories.map((item, index) => (
+        <Tabs.Tab name={item} key={index}>
+          <ArticlePage item={DATA.articles[index]} />
         </Tabs.Tab>
-        {DATA.categories.map((item, index) => (
-          <Tabs.Tab name={item} key={index}>
-            <ArticlePage item={DATA.articles[index]} />
-          </Tabs.Tab>
-        ))}
-      </Tabs.Container>
-    </>
+      ))}
+    </Tabs.Container>
   );
 };
-
-const styles = StyleSheet.create({
-  box: {
-    height: 250,
-    width: "100%",
-  },
-  boxA: {
-    backgroundColor: "white",
-  },
-  boxB: {
-    backgroundColor: "#D8D8D8",
-  },
-  header: {
-    height: HEADER_HEIGHT,
-    width: "100%",
-    backgroundColor: "#2196f3",
-  },
-});
