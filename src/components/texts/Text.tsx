@@ -34,7 +34,7 @@ const textClassName = variants("", {
     },
     family: {
       DM: "",
-      Oblivian: "",
+      Oblivian: "font-Oblivian",
     },
     position: {
       center: "text-center",
@@ -72,7 +72,7 @@ export function Text(props: TextProps) {
     size = "md",
     position = "center",
     weight = "medium",
-    family = "Oblivian",
+    family = "DM",
     ...rest
   } = props;
   return (

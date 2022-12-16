@@ -1,6 +1,7 @@
 import { FlashList } from "@shopify/flash-list";
 import { ArticleCard } from "@components";
 import { View } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 type Article = {
   id: string;
@@ -22,6 +23,7 @@ export const ArticlesList = ({
   horizontal,
   disabled,
 }: ArticleListProps) => {
+  const navigation = useNavigation();
   return (
     <FlashList
       scrollEnabled={!disabled}
@@ -33,6 +35,9 @@ export const ArticlesList = ({
       ListFooterComponent={() => <View className={horizontal ? "pl-4" : ""} />}
       renderItem={({ item, index }: { item: Article; index: number }) => (
         <ArticleCard
+          onPress={() =>
+            navigation.navigate("ArticleDetail", { articleID: item.id })
+          }
           tag={item.tag}
           wishlistButton
           horizontal={horizontal}
