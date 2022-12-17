@@ -12,6 +12,7 @@ import {
   DonationCard,
   SectionName,
   ArticlesList,
+  CreateAccountCard,
 } from "@components";
 import { useRoute } from "@react-navigation/native";
 import { useState } from "react";
@@ -182,8 +183,15 @@ export const ArticleDetailScreen = ({ navigation }: any) => {
           <SectionName name="Autres produits" />
         </View>
       </View>
-      <View>
+      <View className="pb-4">
         <ArticlesList articles={DATA.articles} horizontal />
+      </View>
+      <View className="p-3 flex-1 pb-10">
+        <CreateAccountCard
+          title="Create your account today"
+          subtitle="Never miss exclusive drops again"
+          backgroundColor="#f5f5f5"
+        />
       </View>
     </PageContainer>
   );
