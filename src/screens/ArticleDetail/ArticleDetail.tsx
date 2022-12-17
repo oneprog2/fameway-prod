@@ -7,10 +7,12 @@ import {
   DonationButton,
   SelectType,
   SelectSize,
+  PageContainer,
 } from "@components";
 import { useRoute } from "@react-navigation/native";
 import { useState } from "react";
 import { View, ScrollView } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export const ArticleDetailScreen = ({ navigation }: any) => {
   let route = useRoute();
@@ -21,31 +23,11 @@ export const ArticleDetailScreen = ({ navigation }: any) => {
   });
 
   navigation.setOptions({
-    headerShown: true,
-    headerShadowVisible: false,
-    headerStyle: {
-      backgroundColor: "white",
-      elevation: 0,
-      shadowOpacity: 0,
-      borderBottomWidth: 0,
-    },
-    headerTitle: () => (
-      <Text size="xxl" weight="bold">
-        Store
-      </Text>
-    ),
-    headerLeft: () => (
-      <Button
-        role="empty"
-        onPress={() => navigation.goBack()}
-        iconOnly
-        startSlot={<CustomIcon name="chevron-left" color="black" size={40} />}
-      />
-    ),
+    headerShown: false,
   });
 
   return (
-    <ScrollView className="flex-1 bg-white">
+    <PageContainer title="Store" goBack>
       <View className="p-2">
         <BreadCrumbs
           store={{ id: "pokpok", name: "Amixem" }}
@@ -112,7 +94,7 @@ export const ArticleDetailScreen = ({ navigation }: any) => {
           />
         </View>
       </View>
-    </ScrollView>
+    </PageContainer>
   );
 };
 

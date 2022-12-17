@@ -1,10 +1,5 @@
 import React from "react";
 import { Dimensions, View } from "react-native";
-import Animated, {
-  Extrapolation,
-  interpolate,
-  useAnimatedStyle,
-} from "react-native-reanimated";
 import { Button, CustomIcon, Text, FamewayIcon } from "@components";
 import { useNavigation } from "@react-navigation/native";
 
@@ -29,33 +24,9 @@ export const PageHeader = ({
 }: PageHeaderProps) => {
   const navigation = useNavigation();
 
-  const style = useAnimatedStyle(() => {
-    const scale = interpolate(scrollY.value, [-400, 0], [2, 1], {
-      extrapolateRight: Extrapolation.CLAMP,
-    });
-
-    const translateX = interpolate(scrollY.value, [-400, 0], [WIDTH / 2, 0], {
-      extrapolateRight: Extrapolation.CLAMP,
-    });
-
-    const translateY = interpolate(
-      scrollY.value,
-      [-400, 0],
-      [400 - 56 / 2, 0],
-      {
-        extrapolateRight: Extrapolation.CLAMP,
-      }
-    );
-
-    return { transform: [{ translateY }, { translateX }, { scale }] };
-  });
-
   return (
     <View className="flex-row items-center">
-      <Animated.View
-        className="flex-1 flex-row items-center justify-between px-3 h-14"
-        style={style}
-      >
+      <View className="flex-1 flex-row items-center justify-between px-3 h-14">
         <View className="flex-row items-center">
           {goBack ? (
             <Button
@@ -72,14 +43,16 @@ export const PageHeader = ({
               <FamewayIcon />
             </View>
           ) : null}
-          <Text weight="bold" className="text-2xl">
-            {title}
-          </Text>
+          <View className="flex-1 absolute w-screen -left-3">
+            <Text weight="bold" className="text-2xl">
+              {title}
+            </Text>
+          </View>
         </View>
         {icon ? (
           <Button role={"empty"} onPress={onPress} startSlot={icon} />
         ) : null}
-      </Animated.View>
+      </View>
     </View>
   );
 };

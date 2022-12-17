@@ -90,6 +90,9 @@ export const AppNavigator = () => {
               />
               <Stack.Screen name="Store" component={StoreScreen} />
               <Stack.Screen
+                options={{
+                  headerShown: false,
+                }}
                 name="ArticleDetail"
                 component={ArticleDetailScreen}
               />

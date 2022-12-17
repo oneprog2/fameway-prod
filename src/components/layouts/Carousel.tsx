@@ -1,4 +1,4 @@
-import { Dimensions, Image } from "react-native";
+import { Dimensions, Image, View } from "react-native";
 import { useSharedValue } from "react-native-reanimated";
 import CarouselBase from "react-native-reanimated-carousel";
 import { CardContainer } from "../cards";
