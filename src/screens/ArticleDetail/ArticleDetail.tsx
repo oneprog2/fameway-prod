@@ -7,11 +7,33 @@ import {
   SelectType,
   SelectSize,
   PageContainer,
+  CustomIcon,
+  Accordion,
 } from "@components";
 import { useRoute } from "@react-navigation/native";
 import { useState } from "react";
-import { View, ScrollView } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { View } from "react-native";
+
+const ProductHeaderInformations = () => {
+  return (
+    <>
+      <Text
+        position="left"
+        size="sm"
+        color="neutral-muted"
+        className="pb-[1px]"
+      >
+        Space Fox
+      </Text>
+      <Text position="left" size="xxl" weight="bold" className="pb-[1px]">
+        Sweat Sherpa SAT. VI
+      </Text>
+      <Text family="DM" position="left" size="lg">
+        $75,99
+      </Text>
+    </>
+  );
+};
 
 export const ArticleDetailScreen = ({ navigation }: any) => {
   let route = useRoute();
@@ -41,20 +63,7 @@ export const ArticleDetailScreen = ({ navigation }: any) => {
       </View>
       <Carousel articlePictures={DATA.articles} />
       <View className="px-5 pb-5 mb-80">
-        <Text
-          position="left"
-          size="sm"
-          color="neutral-muted"
-          className="pb-[1px]"
-        >
-          Space Fox
-        </Text>
-        <Text position="left" size="xxl" weight="bold" className="pb-[1px]">
-          Sweat Sherpa SAT. VI
-        </Text>
-        <Text family="DM" position="left" size="lg">
-          $75,99
-        </Text>
+        <ProductHeaderInformations />
         <View className="pt-2">
           <DonationButton />
         </View>
@@ -83,7 +92,7 @@ export const ArticleDetailScreen = ({ navigation }: any) => {
             }
           />
         </View>
-        <View className="pb-4 border-b-[1px] border-[#E6E6E6]">
+        <View className="pb-4 border-b-[1px] border-[#E6E6E6] flex-1">
           <Text className="py-4" position="left" size="md" color="dark">
             {"Size"}
           </Text>
@@ -94,6 +103,36 @@ export const ArticleDetailScreen = ({ navigation }: any) => {
                 ...selected,
                 size: selectedSize,
               })
+            }
+          />
+        </View>
+        <View className="py-4 flex-1">
+          <View className="flex-1 flex-row items-center">
+            <CustomIcon name="check-circle" color="black" size={20} />
+            <Text className="pl-1" position="left" size="md" color="dark">
+              {"Livraison gratuite"}
+            </Text>
+          </View>
+
+          <View className="flex-1 flex-row items-center">
+            <CustomIcon name="check-circle" color="black" size={20} />
+            <Text className="pl-1" position="left" size="md" color="dark">
+              4-5 jours ouvrés
+            </Text>
+          </View>
+        </View>
+
+        <View className="flex-1">
+          <Accordion
+            bodyHeight={180}
+            title="Description"
+            children={
+              <View className="px-3 py-3">
+                <Text position="left">
+                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+                  fpzoekfpeozfkezpofkzealiquet"
+                </Text>
+              </View>
             }
           />
         </View>
