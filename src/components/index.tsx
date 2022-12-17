@@ -10,3 +10,4 @@ export * from "./images";
 export * from "./lists";
 export * from "./headers";
 export * from "./others";
+export * from "./selects";
