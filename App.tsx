@@ -10,6 +10,9 @@ import { PortalProvider } from "@gorhom/portal";
 
 SplashScreen.preventAutoHideAsync();
 
+import { LogBox } from "react-native";
+LogBox.ignoreLogs(["Warning: ..."]); // Ignore log notification by message
+LogBox.ignoreAllLogs(); //Ignore all log notifications
 function App() {
   const [fontsLoaded] = useFonts({
     "Oblivian-Light": require("@assets/fonts/Oblivian/Oblivian-Light.otf"),

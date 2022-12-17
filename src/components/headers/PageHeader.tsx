@@ -6,9 +6,6 @@ import { useNavigation } from "@react-navigation/native";
 const WIDTH = Dimensions.get("window").width;
 
 export type PageHeaderProps = {
-  scrollY: {
-    value: number;
-  };
   goBack?: boolean;
   title: string;
   icon?: string;
@@ -16,7 +13,6 @@ export type PageHeaderProps = {
 };
 
 export const PageHeader = ({
-  scrollY,
   goBack,
   title,
   icon,
@@ -26,7 +22,7 @@ export const PageHeader = ({
 
   return (
     <View className="flex-row items-center">
-      <View className="flex-1 flex-row items-center justify-between px-3 h-14">
+      <View className="flex-1 flex-row items-center justify-between px-3 h-10">
         <View className="flex-row items-center">
           {goBack ? (
             <Button

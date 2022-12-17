@@ -1,7 +1,6 @@
 import {
   Text,
-  CustomIcon,
-  Button,
+  AddToCartButton,
   BreadCrumbs,
   Carousel,
   DonationButton,
@@ -27,7 +26,12 @@ export const ArticleDetailScreen = ({ navigation }: any) => {
   });
 
   return (
-    <PageContainer title="Store" goBack>
+    <PageContainer
+      edges={["top", "bottom", "left", "right"]}
+      title="Sweat Sherpa SAT. VI"
+      goBack
+      footer={<AddToCartButton />}
+    >
       <View className="p-2">
         <BreadCrumbs
           store={{ id: "pokpok", name: "Amixem" }}
