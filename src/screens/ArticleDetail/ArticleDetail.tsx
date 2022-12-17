@@ -9,6 +9,9 @@ import {
   PageContainer,
   CustomIcon,
   Accordion,
+  DonationCard,
+  SectionName,
+  ArticlesList,
 } from "@components";
 import { useRoute } from "@react-navigation/native";
 import { useState } from "react";
@@ -32,6 +35,66 @@ const ProductHeaderInformations = () => {
         $75,99
       </Text>
     </>
+  );
+};
+
+const ArticleInformations = () => {
+  return (
+    <View className="flex-1">
+      <Accordion
+        title="Description"
+        children={
+          <View className="px-3 py-3">
+            <Text position="left">
+              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+              fpzoekfpeozfkezpofkzealiquet"
+            </Text>
+          </View>
+        }
+      />
+      <Accordion
+        title="About"
+        children={
+          <View className="px-3 py-3">
+            <Text position="left">
+              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+              fpzoekfpeozfkezpofkzealiquet"
+            </Text>
+          </View>
+        }
+      />
+      <Accordion
+        title="Materials"
+        children={
+          <View className="px-3 py-3">
+            <Text position="left">
+              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+              fpzoekfpeozfkezpofkzealiquet"
+            </Text>
+          </View>
+        }
+      />
+    </View>
+  );
+};
+
+const ShippingInformations = () => {
+  return (
+    <View className="py-4 flex-1">
+      <View className="flex-1 flex-row items-center">
+        <CustomIcon name="check-circle" color="black" size={20} />
+        <Text className="pl-1" position="left" size="md" color="dark">
+          {"Livraison gratuite"}
+        </Text>
+      </View>
+
+      <View className="flex-1 flex-row items-center">
+        <CustomIcon name="check-circle" color="black" size={20} />
+        <Text className="pl-1" position="left" size="md" color="dark">
+          4-5 jours ouvrés
+        </Text>
+      </View>
+    </View>
   );
 };
 
@@ -62,7 +125,7 @@ export const ArticleDetailScreen = ({ navigation }: any) => {
         />
       </View>
       <Carousel articlePictures={DATA.articles} />
-      <View className="px-5 pb-5 mb-80">
+      <View className="px-5">
         <ProductHeaderInformations />
         <View className="pt-2">
           <DonationButton />
@@ -106,36 +169,21 @@ export const ArticleDetailScreen = ({ navigation }: any) => {
             }
           />
         </View>
-        <View className="py-4 flex-1">
-          <View className="flex-1 flex-row items-center">
-            <CustomIcon name="check-circle" color="black" size={20} />
-            <Text className="pl-1" position="left" size="md" color="dark">
-              {"Livraison gratuite"}
-            </Text>
-          </View>
 
-          <View className="flex-1 flex-row items-center">
-            <CustomIcon name="check-circle" color="black" size={20} />
-            <Text className="pl-1" position="left" size="md" color="dark">
-              4-5 jours ouvrés
-            </Text>
-          </View>
+        <ShippingInformations />
+
+        <ArticleInformations />
+
+        <View className="flex-1 pt-10">
+          <DonationCard />
         </View>
 
-        <View className="flex-1">
-          <Accordion
-            bodyHeight={180}
-            title="Description"
-            children={
-              <View className="px-3 py-3">
-                <Text position="left">
-                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-                  fpzoekfpeozfkezpofkzealiquet"
-                </Text>
-              </View>
-            }
-          />
+        <View>
+          <SectionName name="Autres produits" />
         </View>
+      </View>
+      <View>
+        <ArticlesList articles={DATA.articles} horizontal />
       </View>
     </PageContainer>
   );

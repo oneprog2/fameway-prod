@@ -2,6 +2,7 @@ import { FlashList } from "@shopify/flash-list";
 import { ArticleCard } from "@components";
 import { View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import { FlatList } from "react-native";
 
 type Article = {
   id: string;
@@ -25,7 +26,7 @@ export const ArticlesList = ({
 }: ArticleListProps) => {
   const navigation = useNavigation();
   return (
-    <FlashList
+    <FlatList
       scrollEnabled={!disabled}
       horizontal={horizontal}
       numColumns={horizontal ? 1 : 2}
