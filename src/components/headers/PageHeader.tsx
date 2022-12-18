@@ -2,6 +2,7 @@ import React from "react";
 import { Dimensions, View } from "react-native";
 import { Button, CustomIcon, Text, FamewayIcon } from "@components";
 import { useNavigation } from "@react-navigation/native";
+import clsx from "clsx";
 
 const WIDTH = Dimensions.get("window").width;
 
@@ -27,6 +28,7 @@ export const PageHeader = ({
           {goBack ? (
             <Button
               role="empty"
+              className="z-50"
               onPress={() => navigation.goBack()}
               iconOnly
               startSlot={
@@ -39,7 +41,11 @@ export const PageHeader = ({
               <FamewayIcon />
             </View>
           ) : null}
-          <View className="flex-1 absolute w-screen -left-3">
+          <View
+            className={clsx(
+              title === "Fameway" ? "ml-1" : "flex-1 absolute w-screen -left-3"
+            )}
+          >
             <Text weight="bold" className="text-2xl">
               {title}
             </Text>
