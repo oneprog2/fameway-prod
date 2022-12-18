@@ -4,7 +4,12 @@ import {
   DarkTheme,
   createNavigationContainerRef,
 } from "@react-navigation/native";
-import { HomeScreen, PresentationScreen, StoreScreen } from "@screens";
+import {
+  HomeScreen,
+  PresentationScreen,
+  ArticleDetailScreen,
+  StoreScreen,
+} from "@screens";
 import { useColorScheme } from "react-native";
 import { useGetOnboardingStatus } from "@hooks";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -84,6 +89,13 @@ export const AppNavigator = () => {
                 component={CustomerStackNavigator}
               />
               <Stack.Screen name="Store" component={StoreScreen} />
+              <Stack.Screen
+                options={{
+                  headerShown: false,
+                }}
+                name="ArticleDetail"
+                component={ArticleDetailScreen}
+              />
             </Stack.Group>
           );
         })()}

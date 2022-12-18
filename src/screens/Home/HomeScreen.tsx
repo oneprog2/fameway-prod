@@ -146,7 +146,7 @@ export const HomeScreen = ({ navigation }) => {
       startSlot={<CustomIcon name="search" size={30} color="#717171" />}
       title="Fameway"
     >
-      <View className="fixed h-14">
+      <View className="fixed h-14 mt-2">
         <HorizontalNavbar />
       </View>
       <ScrollView

@@ -1,6 +1,6 @@
-import { CustomIcon } from "@components";
+import { CustomIcon, Text } from "@components";
 import React from "react";
-import { Pressable, Text, View } from "react-native";
+import { Pressable, View } from "react-native";
 import Animated, {
   Easing,
   useAnimatedStyle,
@@ -8,35 +8,32 @@ import Animated, {
   withTiming,
 } from "react-native-reanimated";
 
-const BODY_HEIGHT = 55;
-
 type AccordionProps = {
   title: string;
   children: React.ReactNode;
-  open: boolean;
-  setOpen: (open: boolean) => void;
 };
 
-export const Accordion = ({
-  title,
-  children,
-  open,
-  setOpen,
-}: AccordionProps) => {
+export const Accordion = ({ title, children }: AccordionProps) => {
   const bodyScale = useSharedValue(0);
   const rotation = useSharedValue(0);
+  const [open, setOpen] = React.useState(false);
+  const [bodyHeight, setBodyHeight] = React.useState(55);
 
   const timingConfig = {
     duration: 140,
     easing: Easing.out(Easing.ease),
   };
 
-  const bodyAnimationStyle = useAnimatedStyle(() => ({
-    height: bodyScale.value * BODY_HEIGHT,
-  }));
-
   const arrowAnimationStyle = useAnimatedStyle(() => ({
     transform: [{ rotateZ: `${rotation.value}deg` }],
+  }));
+
+  const computeHeight = (event: any) => {
+    setBodyHeight(event.nativeEvent.layout.height);
+  };
+
+  const bodyAnimationStyle = useAnimatedStyle(() => ({
+    height: bodyScale.value * bodyHeight,
   }));
 
   return (
@@ -48,16 +45,18 @@ export const Accordion = ({
           setOpen(!open);
         }}
       >
-        <View
-          //TODO : Change colors -> theme
-          style={{ borderColor: "hsla(0, 0%, 100%, 0.056)" }}
-          className="flex flex-row space-between items-center p-1 pl-1.5 border-t-[1px]"
-        >
-          <Text className="flex-1 p-3 text-m font-bold text-neutral-100">
+        <View className="flex flex-row space-between items-center p-1 pl-1.5">
+          <Text
+            position="left"
+            weight="bold"
+            size="lg"
+            color="dark"
+            className="flex-1 p-3"
+          >
             {title}
           </Text>
-          <Animated.View style={arrowAnimationStyle}>
-            <CustomIcon name="chevron-down" size="md" color="white" />
+          <Animated.View style={arrowAnimationStyle} className="px-3">
+            <CustomIcon name="plus2" size={25} color="black" />
           </Animated.View>
         </View>
       </Pressable>
@@ -65,13 +64,17 @@ export const Accordion = ({
         className="overflow-hidden border-b-[1px]"
         style={[
           bodyAnimationStyle,
-          //TODO : Change colors -> theme
           {
-            borderColor: "hsla(0, 0%, 100%, 0.056)",
+            borderColor: "#E6E6E6",
           },
         ]}
       >
-        <View className="p-1 pl-[1.5px] absolute bottom-[1px]">{children}</View>
+        <View
+          onLayout={computeHeight}
+          className="p-1 pl-[1.5px] absolute bottom-[1px]"
+        >
+          {children}
+        </View>
       </Animated.View>
     </>
   );

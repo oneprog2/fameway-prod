@@ -1,5 +1,6 @@
 import { CardContainer, Text, Button, CustomIcon } from "@components";
 import { View, Image } from "react-native";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 export type ArticleCardProps = {
   name?: string;
@@ -49,12 +50,14 @@ export const ArticleCard = ({
           size="lg"
           light="off"
         >
-          <Image
-            resizeMode="contain"
-            resizeMethod="resize"
-            source={image}
-            className={"h-full w-full"}
-          ></Image>
+          <TouchableOpacity onPress={onPress}>
+            <Image
+              resizeMode="contain"
+              resizeMethod="resize"
+              source={image}
+              className={"h-full w-full"}
+            ></Image>
+          </TouchableOpacity>
 
           {tag ? (
             <Button
